@@ -8,7 +8,14 @@ import { green, orange } from '@mui/material/colors';
 
 import Pagination from '@mui/material/Pagination';
 
+import { createApi } from "unsplash-js";
 
+import cityscapes from "../../data";
+
+
+/* const application_Id = "546247";
+const access_Key= "XavdZuG1NxsKD-DwBiZ78s9CVgvI4Of4k1FIdOd2e3I";
+const secretKey= "rVS0o1wkGfC_VvwVsVchvNYzM3kv3jLXGizS7vS0A1A"; */
 export default function Cards({image , city, desc, name}) {
 
 /*     const [isFlipped, setIsFlipped] = useState(false);
@@ -41,6 +48,68 @@ export default function Cards({image , city, desc, name}) {
         setCurrentPage(value);
 
     };
+
+/*     const cities = cityscapes.map((item) => item.city)
+    console.log(cities) */
+
+
+
+    const api = createApi({
+        // Don't forget to set your access token here!
+        // See https://unsplash.com/developers
+        accessKey: "XavdZuG1NxsKD-DwBiZ78s9CVgvI4Of4k1FIdOd2e3I"
+      });
+
+    const [data, setPhotosResponse] = useState([]);
+
+    const cities = [
+        "Singapore",
+        "Miami, Florida, USA",
+        "Los Angeles, California, USA",
+
+    ]
+
+/*     useEffect(() => {
+        cities.map(city => {
+                    api.search
+                    .getPhotos({ query: city, orientation: "landscape", page : 1, perPage: 3 })
+                    .then(result => {
+                    
+                        setPhotosResponse(result);
+                    })
+                    .catch(() => {
+                        console.log("something went wrong!");
+                    });
+                }, []);
+            });
+
+    console.log(data) */
+
+    useEffect(() => {
+        const fetchPhotos = async () => {
+            let allPhotos = [];
+            for (const city of cities) {
+                try {
+                    console.log("burasi1")
+                    const response = await api.search.getPhotos({ query: city, orientation: "landscape", page : 1, perPage: 3 });
+                    console.log("burasi2")
+                    if (response.ok) { // Önce yanıtın başarılı olduğunu kontrol et
+                        console.log("burasi3")
+                        const veri = await response.json(); // JSON verisini al
+                        allPhotos = [...allPhotos, veri.results]; // Varsayalım ki data içinde results adında bir dizi var
+                    }
+                    
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+            setPhotosResponse(allPhotos);
+        }
+        fetchPhotos();
+    }, []);
+
+
+    console.log(data)
 
     
 
