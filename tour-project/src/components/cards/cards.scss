@@ -94,3 +94,35 @@ p{
 /* @media screen and (max-width: 768px) {
     width: 100%;
 } */
+.full-page-view-slayt {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 50%;
+
+    z-index: 1000;
+    
+    
+
+
+}
+::-webkit-scrollbar {
+    display: none;
+}
+.full-page-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+   
+    
+     /* Make sure it's above other content */
+    /* Add more styling as needed */
+  }
+.Pagination {
+    color: #20b2aa;
+  }

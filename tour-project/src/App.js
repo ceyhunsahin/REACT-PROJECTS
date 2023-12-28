@@ -15,7 +15,7 @@ function App() {
       </div>
       <div className='cardDesign'>
         {data.map((item) => (
-          <Cards image = {item.image_link} city = {item.city} desc = {item.description}/>
+          <Cards key = {item.city} image = {item.image_link} city = {item.city} desc = {item.description} name = {item.city}/>
         ))}
       </div>
     </div>
