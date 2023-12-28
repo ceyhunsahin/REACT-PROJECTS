@@ -1,5 +1,5 @@
 
-import './App.css';
+import './App.scss';
 import Header from './components/header/header';
 
 import Cards from './components/cards/cards';
@@ -10,8 +10,14 @@ function App() {
   return (
     <div>
       <Header />
-      <Cards data = {data} />
-
+      <div className="topOfCard">
+                <h1> POPULAR TOUR PLACES</h1>
+      </div>
+      <div className='cardDesign'>
+        {data.map((item) => (
+          <Cards image = {item.image_link} city = {item.city} desc = {item.description}/>
+        ))}
+      </div>
     </div>
   );
 }
