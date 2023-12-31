@@ -252,8 +252,8 @@ function ResponsiveAppBar() {
                               
                               <Stack direction= "row" spacing={{ xs: 1, sm: 2 }} useFlexGap flexWrap="wrap" justifyContent="space-evenly"
                                 alignItems="flex-start" margin= "10px" key={index}>
-                                <Item>{item.title}</Item>
-                                <Item>{item.price}$</Item>
+                                <Item sx = {{width: '70%' }}>{item.title}</Item>
+                                <Item sx = {{width: '10%' }}>{item.price}$</Item>
                               </Stack>
                               ))}
                               <Stack direction= "row" spacing={{ xs: 1, sm: 2 }} useFlexGap flexWrap="wrap" justifyContent="space-evenly"
