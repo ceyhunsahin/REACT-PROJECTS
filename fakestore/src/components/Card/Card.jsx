@@ -20,6 +20,7 @@ export default function RecipeReviewCard() {
   const { urun, setUrun } = useContext(DataContext);
 
   const handleAddToUrun = (ali) => {
+    console.log(ali)
     setUrun(currentUrun => [...currentUrun, ali]);
   };
 /*   const handleRemoveFromUrun = (ali) => {
@@ -39,7 +40,7 @@ export default function RecipeReviewCard() {
       axios.get("https://fakestoreapi.com/products")
       .then(res => setData(res.data))
   }, [])
-  console.log(urun.length)
+ 
 
 
 

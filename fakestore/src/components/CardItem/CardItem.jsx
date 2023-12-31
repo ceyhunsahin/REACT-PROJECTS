@@ -14,7 +14,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 
 export const CardItem = ({  donne , handleAddToUrun, handleRemoveFromUrun}) => {
-  const name = donne.title;
+  const name = donne;
   //const img = donne.image;
 
 
@@ -84,18 +84,26 @@ export const CardItem = ({  donne , handleAddToUrun, handleRemoveFromUrun}) => {
                     aria-controls="long-menu"
                     aria-haspopup="true"
                     >
-                    
-                        <RemoveIcon onClick={()=>handleDecrease(name)}/>
-                            <Badge badgeContent={afterSelect} color="primary"> 
+                        <RemoveIcon onClick={()=>handleDecrease(name)} />
+  
+                </IconButton>
+                <Badge badgeContent={afterSelect} color="primary"> 
                                 {afterSelect >=1 ? 
                                     <AddShoppingCartIcon sx = {{color : "green"}}/>
                                     : 
                                     <AddShoppingCartIcon sx = {{color : "red"}}/>
                                 }
                             </Badge>
+                <IconButton
+                    size="medium"
+                    aria-label="show more"
+                    aria-controls="long-menu"
+                    aria-haspopup="true"
+                    >
                         <AddIcon onClick={() => handleIncrease(name)}/>    
+                    </IconButton>
 
-                </IconButton>
+                
             </CardActions>
         </Card>
 
