@@ -10,6 +10,31 @@ const AddTaskForm = ({ tasks, setTasks }) => {
     setTasks([...tasks, addNewTask]);
   };
 
+  /**
+  |--------------------------------------------------
+  | const addTask = async (newTask) => {
+    const response = await fetch(baseURL, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text, day }),
+      });
+      await response.json();
+      fetchTask();
+  }
+
+  AXIOS ile cekiyoruz
+
+  const addTask = async (newTask) => {
+    const response = await axios.post(baseURL, { newTask});
+    
+    fetchTask()
+};
+  |--------------------------------------------------
+  */
+
   const handleSubmit = (e) => {
     e.preventDefault();
     addTask({ text: text, day: day, isDone: false });

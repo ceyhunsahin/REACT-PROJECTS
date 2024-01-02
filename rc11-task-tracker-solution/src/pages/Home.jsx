@@ -11,6 +11,43 @@ const Home = () => {
     return saved || [];
   });
 
+  const baseURL = "http://localhost:5000/tasks";
+
+  //! CRUD Create Read Update Delete
+  /* 
+  |--------------------------------------------------
+  const fetchTask = async () => {
+    try {
+        const resp = await fetch(baseURL);
+        const data = await resp.json();
+        setTasks(data);
+        } catch (err) {
+            console.log(err);
+        }
+    }; Disarda tanimlandiginda her zaman kullanirim
+  useEffect(() => {
+    fetchTask(), ilk render'de calissin istiyorsam
+    },[]); 
+
+
+    AXIOS ile 
+      const fetchTask = async () => {
+    try {
+        const {data} = await axios.get(baseURL);
+        
+        setTasks(data);
+        } catch (err) {
+            console.log(err);
+        }
+    }; Disarda tanimlandiginda her zaman kullanirim
+  useEffect(() => {
+    fetchTask(), ilk render'de calissin istiyorsam
+    },[]); 
+  |--------------------------------------------------
+
+  */
+
+
   //! When tasks is updated, Refresh tasks in the localStorage
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
