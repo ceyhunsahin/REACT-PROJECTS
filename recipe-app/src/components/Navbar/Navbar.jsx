@@ -13,58 +13,16 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { SvgIcon } from "@mui/material";
-import { styled } from '@mui/system';
+import { styled } from "@mui/system";
 import { NavLink, Link } from "react-router-dom";
 import { useId } from "react";
 
 const pages = ["Recipes", "About", "Github"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-const active={
-  mr: 2,
-  display: { xs: "flex", md: "none" },
-  flexGrow: 1,
-  fontFamily: "monospace",
-  fontWeight: 700,
-  letterSpacing: ".2rem",
-  color: "#e51a59",
-  textDecoration: "none",
-  cursor: 'pointer',
-   
-    "&:hover": {
-     
-      color: "#e51a59",
-      transition: "all 0.2s ease-in-out"
-
-    },
-    "&:visited": {
-      color: "#e51a59",
-    },
-    
-    
-}
-const notactive={
- 
-  cursor: 'pointer',
-   
-    "&:hover": {
-     
-      color: "#e51a59",
-      transition: "all 0.2s ease-in-out"
-
-    },
-    "&:visited": {
-      color: "#e51a59",
-    },
-    
-    
-}
-
-
-
 function Navbar() {
   const id = useId();
-  console.log(id)
+  console.log(id);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -77,97 +35,87 @@ function Navbar() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-   
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-   
   };
 
   const handleHomeMenu = () => {
-    <Link to="/" >Home</Link>;
-  }
-
-  const handleLinkMenu = (e) => {
-    console.log(e.currentTarget.value)
-  }
+    return <Link to="/home">Home</Link>;
+  };
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <SvgIcon sx={{ display: { xs: "none", md: "flex" }, xl: 1 }}>
-            <svg
-              version="1.0"
-              xmlns="http://www.w3.org/2000/svg"
-              width="190.000000pt"
-              height="190.000000pt"
-              viewBox="00 0 50.000000 1.000000"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <g
-                transform="translate(0.000000,32.000000) scale(0.100000,-0.100000)"
-                fill="#e51a59"
-                stroke="none"
+          <Link to="/" sx={{ cursor: "pointer" }}>
+            <SvgIcon sx={{ display: { xs: "none", md: "flex" }, xl: 1 }}>
+              <svg
+                version="1.0"
+                xmlns="http://www.w3.org/2000/svg"
+                width="190.000000pt"
+                height="190.000000pt"
+                viewBox="00 0 50.000000 1.000000"
+                preserveAspectRatio="xMidYMid meet"
               >
-                <path
-                  d="M130 511 c0 -6 3 -12 8 -15 4 -2 39 -54 77 -115 l69 -111 74 0 74 0
+                <g
+                  transform="translate(0.000000,32.000000) scale(0.100000,-0.100000)"
+                  fill="#e51a59"
+                  stroke="none"
+                >
+                  <path
+                    d="M130 511 c0 -6 3 -12 8 -15 4 -2 39 -54 77 -115 l69 -111 74 0 74 0
                     -14 23 c-8 12 -43 68 -78 125 l-63 102 -74 0 c-40 0 -73 -4 -73 -9z"
-                />
-                <path
-                  d="M33 452 c-21 -7 -20 -11 35 -94 l56 -88 58 0 57 0 -61 95 c-56 88
+                  />
+                  <path
+                    d="M33 452 c-21 -7 -20 -11 35 -94 l56 -88 58 0 57 0 -61 95 c-56 88
                     -63 95 -92 94 -17 -1 -41 -4 -53 -7z"
-                />
+                  />
 
-                <path
-                  d="M68 163 c-55 -84 -56 -88 -35 -95 12 -3 36 -6 53 -7 29 -1 36 6 92
+                  <path
+                    d="M68 163 c-55 -84 -56 -88 -35 -95 12 -3 36 -6 53 -7 29 -1 36 6 92
                     94 l61 95 -57 0 -58 0 -56 -87z"
-                />
-                <path
-                  d="M221 148 c-35 -57 -71 -113 -79 -125 l-14 -23 74 0 75 0 63 103 c35
+                  />
+                  <path
+                    d="M221 148 c-35 -57 -71 -113 -79 -125 l-14 -23 74 0 75 0 63 103 c35
                     56 70 112 78 125 l14 22 -74 0 -74 0 -63 -102z"
-                />
-              </g>
-            </svg>
-          </SvgIcon>
-          
-            <Typography
-              variant="h5"
-              noWrap
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".2rem",
-                color: "#e51a59",
-                textDecoration: "none",
-                cursor: 'pointer',
-               
-                "&:hover": {
-                 
-                  color: "white",
-                  transition: "all 0.2s ease-in-out"
+                  />
+                </g>
+              </svg>
+            </SvgIcon>
+          </Link>
 
-                },
-                "&:visited": {
-                  color: "red",
-                },
-                "&:active": {
-                  color: "orange",
-                },
-                "&:focus": {
-                  color: "orange",
-                },
-              }}
-              onClick = {handleHomeMenu}
-              
-            >
-               CLARUSWAY
-            </Typography>
-        
+          <Typography
+            variant="h5"
+            noWrap
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".2rem",
+              color: "#e51a59",
+              textDecoration: "none",
+              color: "#e51a59",
+              cursor: "pointer",
+              "&:hover": {
+                color: "white",
+                transition: "all 0.2s ease-in-out",
+              },
+              "&:visited": {
+                color: "red",
+              },
+              "&:active": {
+                color: "orange",
+              },
+            }}
           
+          >
+            <Link to="/" style={{ textDecoration: "none", color: "#e51a59" }}>
+              CLARUSWAYs
+            </Link>
+          </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -200,111 +148,134 @@ function Navbar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                <NavLink key={`${page }-${id}`} onClick={handleCloseNavMenu} to = {page}>
-                  <Typography 
-                  sx = {{
-                    
-                    cursor: 'pointer',
-               
-                "&:hover": {
-                 
-                  color: "white",
-                  transition: "all 0.2s ease-in-out"
+                  <Link
+                    key={`${page}-${id}`}
+                    onClick={handleCloseNavMenu}
+                    to={page}
+                    style={{ textDecoration: "none", color: "white" }}
+                  >
+                    <Typography
+                      sx={{
+                        fontWeight: 500,
+                        color: "#e51a59",
+                        textDecoration: "none",
+                        cursor: "pointer",
 
-                },
-                "&:visited": {
-                  color: "red",
-                },
-                "&:active": {
-                  color: "orange",
-                },
-                  }} textAlign="center">
-                  
-                  
-                  {page}
-                  </Typography>
-                  </NavLink>
+                        "&:hover": {
+                          transition: "all 0.2s ease-in-out",
+                        },
+                        "&:visited": {
+                          color: "blue",
+                        },
+                        "&:active": {
+                          color: "orange",
+                        },
+                        textAlign: "center",
+                      }}
+                    >
+                      {page}
+                    </Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <SvgIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}>
-            <svg
-              version="1.0"
-              xmlns="http://www.w3.org/2000/svg"
-              width="190.000000pt"
-              height="190.000000pt"
-              viewBox="00 0 60.000000 1.000000"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <g
-                transform="translate(0.000000,32.000000) scale(0.100000,-0.100000)"
-                fill="#e51a59"
-                stroke="none"
+          <Link to="/" sx={{ cursor: "pointer" }}>
+            <SvgIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}>
+              <svg
+                version="1.0"
+                xmlns="http://www.w3.org/2000/svg"
+                width="190.000000pt"
+                height="190.000000pt"
+                viewBox="00 0 60.000000 1.000000"
+                preserveAspectRatio="xMidYMid meet"
               >
-                <path
-                  d="M130 511 c0 -6 3 -12 8 -15 4 -2 39 -54 77 -115 l69 -111 74 0 74 0
+                <g
+                  transform="translate(0.000000,32.000000) scale(0.100000,-0.100000)"
+                  fill="#e51a59"
+                  stroke="none"
+                >
+                  <path
+                    d="M130 511 c0 -6 3 -12 8 -15 4 -2 39 -54 77 -115 l69 -111 74 0 74 0
                     -14 23 c-8 12 -43 68 -78 125 l-63 102 -74 0 c-40 0 -73 -4 -73 -9z"
-                />
-                <path
-                  d="M33 452 c-21 -7 -20 -11 35 -94 l56 -88 58 0 57 0 -61 95 c-56 88
+                  />
+                  <path
+                    d="M33 452 c-21 -7 -20 -11 35 -94 l56 -88 58 0 57 0 -61 95 c-56 88
                     -63 95 -92 94 -17 -1 -41 -4 -53 -7z"
-                />
+                  />
 
-                <path
-                  d="M68 163 c-55 -84 -56 -88 -35 -95 12 -3 36 -6 53 -7 29 -1 36 6 92
+                  <path
+                    d="M68 163 c-55 -84 -56 -88 -35 -95 12 -3 36 -6 53 -7 29 -1 36 6 92
                     94 l61 95 -57 0 -58 0 -56 -87z"
-                />
-                <path
-                  d="M221 148 c-35 -57 -71 -113 -79 -125 l-14 -23 74 0 75 0 63 103 c35
+                  />
+                  <path
+                    d="M221 148 c-35 -57 -71 -113 -79 -125 l-14 -23 74 0 75 0 63 103 c35
                     56 70 112 78 125 l14 22 -74 0 -74 0 -63 -102z"
-                />
-              </g>
-            </svg>
-          </SvgIcon>
+                  />
+                </g>
+              </svg>
+            </SvgIcon>
+          </Link>
+
           <Typography
             variant="h5"
             noWrap
+            onClick={handleHomeMenu}
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".2rem",
-              color: "#e51a59",
+              letterSpacing: ".3rem",
               textDecoration: "none",
-              cursor: 'pointer',
-               
-                "&:hover": {
-                 
-                  color: "#e51a59",
-                  transition: "all 0.2s ease-in-out"
-
-                },
-                "&:visited": {
-                  color: "#e51a59",
-                },
-                
-                
+              color: "#e51a59",
+              cursor: "pointer",
+              "&:hover": {
+                color: "white",
+                transition: "all 0.2s ease-in-out",
+              },
+              "&:visited": {
+                color: "red",
+              },
+              "&:active": {
+                color: "orange",
+              },
             }}
           >
-            CLARUSWAY
+            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+              {" "}
+              CLARUSWAYk
+            </Link>
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" },
-           }}>
+
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick= {handleLinkMenu}
-                sx={{ my: 2, color: "white", display: "block",
-                 }}
+                sx={{
+                  my: 2,
+                  display: "block",
+
+                  cursor: "pointer",
+
+                  "&:hover": {
+                    color: "#e51a59",
+                    transition: "all 0.2s ease-in-out",
+                  },
+                  "&:visited": {
+                    color: "white",
+                  },
+                }}
               >
-                 <NavLink 
-                 className={({ isActive }) =>
-                isActive ? "active" : "notactive"
-              }
-           key={`${page }-${id}`} onClick={handleCloseNavMenu} to = {page}>{page}</NavLink>
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  key={`${page}-${id}`}
+                  onClick={handleCloseNavMenu}
+                  to={page}
+                >
+                  {page}
+                </Link>
               </Button>
             ))}
           </Box>
