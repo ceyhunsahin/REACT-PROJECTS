@@ -17,12 +17,14 @@ import { styled } from "@mui/system";
 import { NavLink, Link } from "react-router-dom";
 import { useId } from "react";
 
+
 const pages = ["Recipes", "About", "Github"];
+
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
   const id = useId();
-  console.log(id);
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -42,12 +44,12 @@ function Navbar() {
   };
 
   const handleHomeMenu = () => {
-    return <Link to="/home">Home</Link>;
+    return null
   };
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" style = {{backgroundColor:'#D3B59B'}}>
         <Toolbar disableGutters>
           <Link to="/" sx={{ cursor: "pointer" }}>
             <SvgIcon sx={{ display: { xs: "none", md: "flex" }, xl: 1 }}>
@@ -85,18 +87,17 @@ function Navbar() {
               </svg>
             </SvgIcon>
           </Link>
-
+          <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
           <Typography
             variant="h5"
             noWrap
+            onClick={handleHomeMenu}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".2rem",
-              color: "#e51a59",
-              textDecoration: "none",
               color: "#e51a59",
               cursor: "pointer",
               "&:hover": {
@@ -109,13 +110,15 @@ function Navbar() {
               "&:active": {
                 color: "orange",
               },
+   
             }}
           
           >
-            <Link to="/" style={{ textDecoration: "none", color: "#e51a59" }}>
-              CLARUSWAYs
-            </Link>
+            
+              CLARUSWAY
+          
           </Typography>
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -124,8 +127,8 @@ function Navbar() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="#e51a59"
-            >
+            
+              >
               <MenuIcon />
             </IconButton>
             <Menu
@@ -146,22 +149,23 @@ function Navbar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
+              {pages.map((page,index) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Link
                     key={`${page}-${id}`}
                     onClick={handleCloseNavMenu}
                     to={page}
-                    style={{ textDecoration: "none", color: "white" }}
+                    style={{ textDecoration: "none"}}
                   >
                     <Typography
                       sx={{
-                        fontWeight: 500,
+                        fontWeight: 100,
                         color: "#e51a59",
-                        textDecoration: "none",
+                        
                         cursor: "pointer",
-
-                        "&:hover": {
+                        
+              "&:hover": {
+                       color: "blue",
                           transition: "all 0.2s ease-in-out",
                         },
                         "&:visited": {
@@ -171,6 +175,8 @@ function Navbar() {
                           color: "orange",
                         },
                         textAlign: "center",
+                      
+
                       }}
                     >
                       {page}
@@ -245,7 +251,7 @@ function Navbar() {
           >
             <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
               {" "}
-              CLARUSWAYk
+              CLARUSWAY
             </Link>
           </Typography>
 
@@ -260,16 +266,16 @@ function Navbar() {
                   cursor: "pointer",
 
                   "&:hover": {
-                    color: "#e51a59",
+                    color: "green",
                     transition: "all 0.2s ease-in-out",
                   },
-                  "&:visited": {
-                    color: "white",
-                  },
+                  "&:active": {
+                          color: "orange",
+                        },
                 }}
               >
                 <Link
-                  style={{ textDecoration: "none", color: "white" }}
+                  style={{ textDecoration: "none", color: "white"}}
                   key={`${page}-${id}`}
                   onClick={handleCloseNavMenu}
                   to={page}
@@ -283,7 +289,7 @@ function Navbar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Ceyhun" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu

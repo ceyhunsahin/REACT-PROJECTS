@@ -11,7 +11,8 @@ import Layout from './components/Layout/Layout';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
 import Github from './components/pages/Github';
-import Recipes from './components/pages/Recipes';
+import Recipes, {loader as RecipeLoader} from './components/pages/RecipePage/Recipes';
+import RecipeDetail , {loader as recipeDetailLoader} from "./components/pages/RecipePage/RecipeDetail";
 
 
 
@@ -20,9 +21,15 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />} >
        <Route index element = {<Home />} />
-       <Route path="/about" element = {<About />} />
-       <Route path="/github" element = {<Github />} />
-       <Route path="/Recipes" element = {<Recipes />} />
+       <Route path="/About" element = {<About />} />
+       <Route path="/Github" element = {<Github />} />
+       <Route path="/Recipes" element = {<Recipes/>}
+        loader = {RecipeLoader} />
+      <Route path="Recipes/:id" element = {<RecipeDetail/>}
+       loader={recipeDetailLoader}
+        />
+
+
        
     </ Route >
   )

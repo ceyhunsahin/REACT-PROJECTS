@@ -7,7 +7,7 @@ function Layout() {
     return (
         <div>
           <Navbar />
-          <main>
+          <main style = {{backgroundColor : '#F2F7F9'}}>
             <Outlet />
           </main>
           <Footer />
