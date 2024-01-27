@@ -24,14 +24,17 @@ import { getRecipes } from "../../util";
 import { useLoaderData, useSearchParams, Link } from "react-router-dom";
 
 export function loader({request}) {
-  console.log("request", request)
-  if(request.url !== 'http://localhost:3000/Recipes') {
+
+  console.log("request",request)
+/*   if (!request.ok){
     const mealType =  request.url.split('?')[1].split('&')[0].split('=')[1]
     const query =  request.url.split('?')[1].split('&')[0].split('=')[1]
     return getRecipes(query, mealType)
-  } else {
+   }else { */
     return getRecipes()
-  }
+   
+    
+
 
 }
 
@@ -119,10 +122,11 @@ function Recipes() {
   const data = useLoaderData().hits;
 
 
-  console.log("data", data[0].recipe.image);
+  console.log("data", data);
 
-  const [searchParams, setSearchParams] = useSearchParams({});
+  const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState("");
+  console.log("searchParams",searchParams)
 
 
   const [loading, setLoading] = React.useState(true);
@@ -265,6 +269,9 @@ function Recipes() {
           <Link  to={extractIdFromUri(`${item.recipe.uri}`)}
                  key={extractIdFromUri(item.recipe.uri)}
                  style={{ textDecoration: "none", color: "inherit"  }}
+                 state={{
+                      search: `?${searchParams.toString()}`,
+                  }}
                  >
           
           <Card sx={{ width: 345, height:350 , marginTop: 3}} 

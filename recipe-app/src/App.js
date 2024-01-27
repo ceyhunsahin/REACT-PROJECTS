@@ -13,6 +13,7 @@ import About from './components/pages/About';
 import Github from './components/pages/Github';
 import Recipes, {loader as RecipeLoader} from './components/pages/RecipePage/Recipes';
 import RecipeDetail , {loader as recipeDetailLoader} from "./components/pages/RecipePage/RecipeDetail";
+import Error from './components/pages/RecipePage/ErrorRecipe';
 
 
 
@@ -24,9 +25,11 @@ const router = createBrowserRouter(
        <Route path="/About" element = {<About />} />
        <Route path="/Github" element = {<Github />} />
        <Route path="/Recipes" element = {<Recipes/>}
-        loader = {RecipeLoader} />
+        loader = {RecipeLoader}
+        errorElement = {<Error/>} />
       <Route path="Recipes/:id" element = {<RecipeDetail/>}
        loader={recipeDetailLoader}
+       errorElement = {<Error/>}
         />
 
 

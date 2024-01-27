@@ -9,7 +9,7 @@ const url =  "https://api.edamam.com/api/recipes/v2"
 const detailUri = "http%3A%2F%2Fwww.edamam.com%2Fontologies%2Fedamam.owl%23recipe_"
 
 
-export const getRecipes = async (query='Chicken', mealType='Lunch') => {
+export const getRecipes = async (query='null', mealType='null') => {
     const fullUrl = query || mealType 
                     ?
                     `${url}?type=public&q=${query}&app_id=${app_id}&app_key=${app_key}` 
@@ -22,6 +22,8 @@ export const getRecipes = async (query='Chicken', mealType='Lunch') => {
 
     
     const response = await axios.get(fullUrl)
+
+    
 
     return response.data
 }

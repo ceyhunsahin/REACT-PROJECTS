@@ -1,9 +1,10 @@
 import React, {useState} from "react";
-import { useParams, useLoaderData, useLocation } from "react-router-dom";
+import { useParams, useLoaderData, useLocation, useNavigate, redirect,Link } from "react-router-dom";
 import { getRecipeDetails } from "../../util";
 import { Typography } from "@mui/material";
 import { Container } from "@mui/joy";
 import { Stack, Box } from "@mui/system";
+import BackArrow from "./BackArrow";
 
 
 export function loader({ params }) {
@@ -18,27 +19,40 @@ export default function RecipeDetail() {
   const [showAllDigest, setShowAllDigest] = useState(false);
   const [showAllingredients, setShowAllIngredients] = useState(false)
 
-  const handleShowAllDigest = (e) => {
-    setShowAllDigest(true);
+  const handleShowAllDigest = () => {
+    setShowAllDigest(!showAllDigest);
   };
-  const handleShowAllIngredients = (e) => {
-    setShowAllIngredients(true);
+  const handleShowAllIngredients = () => {
+    setShowAllIngredients(!showAllingredients);
   };
-
+  console.log("showAllDigest",showAllDigest)
   const visibleItemsDigest = showAllDigest ? data[0].recipe.digest : data[0].recipe.digest.slice(0, 5);
+ 
   const visibleItemsIngredients = showAllingredients? data[0].recipe.ingredientLines : data[0].recipe.ingredientLines.slice(0, 5);
+
+  const search = location.state?.search || "all";
+  
+  console.log("search", search)
 
   return (
     <>
+        <Link
+        to={`../${search}`}
+        relative="path"
+      >
+        Back to {search}
+      </Link>
       <Typography variant="h4" fontWeight='bold' fontSize={'2.5rem'} align="center">
         {data[0].recipe.label}
       </Typography>
       <Stack
         direction={{ xs: "column", sm: "row" }}
-        justifyContent="center"
+        justifyContent="space-between"
         alignItems="center"
         spacing={3}
         pt={3}
+        mx={5}
+        my={5}
         divider={
           <Box
             component="hr"
@@ -51,12 +65,24 @@ export default function RecipeDetail() {
           />
         }
       >
-        <Box>
+        <Box  sx ={{ display: "flex",flexDirection: "column", flexWrap: "wrap", gap: 0.5,  width:'auto',overflow: 'hidden'  }}>
           {visibleItemsDigest.map((line, index) => (
-            <Typography key={line} sx={300}>
+            <Typography key={line.label} >
               {index} - {line.label} / Total : {Math.trunc(line.total)}
             </Typography>
+            
           ))}
+          {showAllDigest && (
+            <Typography
+                variant="body1"
+                component="div"
+                sx={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
+                onClick={handleShowAllDigest}
+                >
+            ...No Need 
+            </Typography>
+          )}
+
           {!showAllDigest && (
             <Typography
                 variant="body1"
@@ -71,9 +97,9 @@ export default function RecipeDetail() {
         <Box>
           <img src={data[0].recipe.image} alt={data[0].recipe.label} />
         </Box>
-        <Box>
+        <Box sx ={{ display: "flex", flexDirection: "column",flexWrap: "wrap", gap: 0.5, width:'40%',overflow: 'hidden' }}>
           {visibleItemsIngredients.map((line, index) => (
-            <Typography key={line}>
+            <Typography key={index}>
               {index} - {line}
             </Typography>
           ))}
@@ -85,6 +111,16 @@ export default function RecipeDetail() {
                 onClick={handleShowAllIngredients}
                 >
             ...More Info
+            </Typography>
+          )}
+          {showAllingredients && (
+            <Typography
+                variant="body1"
+                component="div"
+                sx={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
+                onClick={handleShowAllIngredients}
+                >
+            ...No Need 
             </Typography>
           )}
         </Box>

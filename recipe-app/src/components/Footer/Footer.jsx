@@ -15,7 +15,7 @@ function Footer() {
             backgroundColor: "text.disabled",
             paddingTop: "1rem",
             paddingBottom: "1rem",
-            position: "relative",
+            position:'static',
             bottom: 0,
             left: 0,
             right: 0,
