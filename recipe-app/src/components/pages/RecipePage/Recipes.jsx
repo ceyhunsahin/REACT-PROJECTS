@@ -21,22 +21,56 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { getRecipes } from "../../util";
-import { useLoaderData, useSearchParams, Link } from "react-router-dom";
+import { useLoaderData, useSearchParams, Link, useLocation} from "react-router-dom";
+import DetailShareActions from "./DetailPages/DetailShareActions";
 
-export function loader({request}) {
-
-  console.log("request",request)
-/*   if (!request.ok){
-    const mealType =  request.url.split('?')[1].split('&')[0].split('=')[1]
-    const query =  request.url.split('?')[1].split('&')[0].split('=')[1]
-    return getRecipes(query, mealType)
-   }else { */
-    return getRecipes()
-   
-    
+// loader.js
+export function loader({ request }) {
+  const urlParts = request.url?.split('?');
 
 
+  if (urlParts?.length === 2) {
+    const queryParams = urlParts[1].split('&');
+    const params = {};
+
+
+    queryParams.forEach(param => {
+      const [key, value] = param.split('=');
+      if (params[key]) {
+        // If the parameter already exists, convert it to an array
+        params[key] = Array.isArray(params[key]) ? [...params[key], ...value.split(',')] : [params[key], ...value.split(',')];
+      } else {
+        params[key] = value.split(',');
+      }
+    });
+
+    console.log("queryPAramsssss", queryParams)
+
+    const { q, mealType } = params;
+
+    console.log("MAILTYPEEEEE", mealType);
+    console.log("queryyyyyyyyy", q);
+
+    if (mealType && q) {
+      console.log("burdayiz demi");
+      return getRecipes(q, Array.isArray(mealType) ? mealType : [mealType.join(',')]);
+    } else if (q) {
+
+      return getRecipes(q);
+    } else if (mealType) {
+      console.log("burda1")
+      return getRecipes(null, Array.isArray(mealType) ? mealType : [mealType]);
+    }
+  } else if (urlParts?.length === 1 && urlParts[0].includes('q=')) {
+    const query = urlParts[0].split('=')[1];
+    return getRecipes(query);
+  } else {
+    return getRecipes();
+  }
 }
+  
+
+
 
 const ITEM_HEIGHT = 40;
 const ITEM_PADDING_TOP = 5;
@@ -123,58 +157,91 @@ function Recipes() {
 
 
   console.log("data", data);
-
+  const [loading, setLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState("");
-  console.log("searchParams",searchParams)
+  const [mealsName, setMealsName] = useState([]);
+  console.log("mealsName11111111111111", mealsName[0]);
+  console.log("searchParamsssssssssss",searchParams)
 
 
-  const [loading, setLoading] = React.useState(true);
+  
 
 
   function handleClick() {
     setLoading(false);
     setTimeout(() => setLoading(true), 2000);
-
-    setSearchParams({ ...searchParams,
-                    mealType: mealsName ,
-                    q: query,
+    console.log("queryryryryryryrsdvsqdfqsqsfqsdfdqsf", query);
+  
+    setSearchParams((prevSearchParams) => {
+      const updatedSearchParams = {
+        ...prevSearchParams,
+        mealType: mealsName,
+      };
+  
+      if (query && query !== "") {
+        updatedSearchParams.q = query;
+      } else {
+        delete updatedSearchParams.q;
+      }
+  
+      return updatedSearchParams;
     });
-
-    //console.log("searchParams", searchParams);
-
-    console.log("searchParams.get('q') Click sonrasi", searchParams.get("q"), "searchParams.get('mealType')", searchParams.get("mealType"))
   }
 
+
   const theme = useTheme();
-  const [mealsName, setMealsName] = React.useState([]);
-  console.log("mealsName", mealsName[0]);
+  
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    console.log("target.value", value);
     setMealsName(
       // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
+      typeof value === "string" ? null : value
     );
 
-    
-    
   };
+  console.log("mealsNAMEEEEeeee", mealsName);
 
   const handleSearchChange = (event) => {
     const {
       target: { value },
     } = event;
-    console.log("query",query)
     setQuery(value);
-  }
+    console.log("queryryryryryryr",query)
+
+    }
 
   const extractIdFromUri=(uri) => {
     return uri.split('#recipe_').pop()
-}
+}  
+
+  const location = useLocation();
+  const searchParamsNew = new URLSearchParams(location.search);
+  const queryFromParams = searchParamsNew.get('q');
+  const mealTypeFromParams = searchParamsNew.getAll('mealType');
+
+
+  console.log("searchParamsNew",mealTypeFromParams);
+  useEffect(() => {
+ 
+
+    // Bu değerleri state'e set edebilirsiniz
+    setQuery(queryFromParams || '');
+    setMealsName(mealTypeFromParams );
+  }, [location.search]);
+
+
+  const shareActions = () => {
+
+    return ( <DetailShareActions />)
+
+  }
+
+
+
 
   return (
     <Container >
@@ -204,6 +271,7 @@ function Recipes() {
             placeholder="Search…"
             inputProps={{ "aria-label": "q" }}
             onChange={handleSearchChange}
+            value={query}
           />
         </Search>
         <Stack>
@@ -270,7 +338,7 @@ function Recipes() {
                  key={extractIdFromUri(item.recipe.uri)}
                  style={{ textDecoration: "none", color: "inherit"  }}
                  state={{
-                      search: `?${searchParams.toString()}`,
+                      search: `${searchParams.toString()}`,
                   }}
                  >
           
@@ -288,7 +356,7 @@ function Recipes() {
             </CardContent>
             <Box >
               <CardActions sx = {{display:'flex', flexDirection:'row', justifyContent:'space-evenly'}}>
-                <Button size="small">Share</Button>
+                <Button size="small" onClick = {shareActions}>Share</Button>
                 <Button size="small">Learn More</Button>
               </CardActions>
             </Box>

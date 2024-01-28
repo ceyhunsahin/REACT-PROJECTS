@@ -9,24 +9,36 @@ const url =  "https://api.edamam.com/api/recipes/v2"
 const detailUri = "http%3A%2F%2Fwww.edamam.com%2Fontologies%2Fedamam.owl%23recipe_"
 
 
-export const getRecipes = async (query='null', mealType='null') => {
-    const fullUrl = query || mealType 
-                    ?
-                    `${url}?type=public&q=${query}&app_id=${app_id}&app_key=${app_key}` 
-                    : 
-                    `${url}?type=public&&q=${query}app_id=${app_id}&app_key=${app_key}&mealType=${mealType}`
-                    ?
-                    `${url}?type=public&app_id=${app_id}&app_key=${app_key}&mealType=${mealType}`
-                    :
-                    `${url}?type=public&app_id=${app_id}&app_key=${app_key}`
+export const getRecipes = async (query , mealType) => {
+    console.log("mealTypefull", mealType)
+    console.log("queryfull", query)
+    const queryParams = [];
 
+
+    if (query !== 'null') {
+      queryParams.push(`q=${query}`);
+    }
+  
+    if (Array.isArray(mealType) && mealType.length > 0) {
+        mealType.forEach(type => {
+          queryParams.push(`mealType=${type}`);
+        });
+      }
+
+    console.log("bu queryPArams onemli", queryParams)
+
+  
+    const fullUrl = `${url}?type=public&app_id=${app_id}&app_key=${app_key}${queryParams.length > 0 ? `&${queryParams.join('&')}` : ''}`;
+    try {
+        const response = await axios.get(fullUrl);
+        return response.data;
+
+    } catch (error) {
+        throw new Error(error.message);
+    }
     
-    const response = await axios.get(fullUrl)
+  };
 
-    
-
-    return response.data
-}
 export const getRecipeDetails = async (id) => {
 
 

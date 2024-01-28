@@ -16,6 +16,7 @@ export default function RecipeDetail() {
   const { id } = useParams();
   const location = useLocation();
   const data = useLoaderData();
+  console.log('datadatadatdtadtadtatd', data)
   const [showAllDigest, setShowAllDigest] = useState(false);
   const [showAllingredients, setShowAllIngredients] = useState(false)
 
@@ -30,17 +31,17 @@ export default function RecipeDetail() {
  
   const visibleItemsIngredients = showAllingredients? data[0].recipe.ingredientLines : data[0].recipe.ingredientLines.slice(0, 5);
 
-  const search = location.state?.search || "all";
+  const search = location.state?.search ;
   
   console.log("search", search)
 
   return (
     <>
         <Link
-        to={`../${search}`}
+        to={search === '' ? "/recipes" : `../?${search}`}
         relative="path"
       >
-        Back to {search}
+        Back to {search?.split("&")[0]?.split("=")[1]} {search?.split("&")[1]?.split("=")[1]}
       </Link>
       <Typography variant="h4" fontWeight='bold' fontSize={'2.5rem'} align="center">
         {data[0].recipe.label}
@@ -68,7 +69,7 @@ export default function RecipeDetail() {
         <Box  sx ={{ display: "flex",flexDirection: "column", flexWrap: "wrap", gap: 0.5,  width:'auto',overflow: 'hidden'  }}>
           {visibleItemsDigest.map((line, index) => (
             <Typography key={line.label} >
-              {index} - {line.label} / Total : {Math.trunc(line.total)}
+              {index} - {line.label} / Total : {Math.trunc(line.total)} Cal
             </Typography>
             
           ))}

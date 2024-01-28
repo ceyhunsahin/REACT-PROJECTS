@@ -18,7 +18,7 @@ import { NavLink, Link } from "react-router-dom";
 import { useId } from "react";
 
 
-const pages = ["Recipes", "About", "Github"];
+const pages = ["recipes", "about", "github"];
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -154,7 +154,7 @@ function Navbar() {
                   <Link
                     key={`${page}-${id}`}
                     onClick={handleCloseNavMenu}
-                    to={page}
+                    to={`/${page.toLowerCase()}`}
                     style={{ textDecoration: "none"}}
                   >
                     <Typography
@@ -278,7 +278,7 @@ function Navbar() {
                   style={{ textDecoration: "none", color: "white"}}
                   key={`${page}-${id}`}
                   onClick={handleCloseNavMenu}
-                  to={page}
+                  to={`/${page.toLowerCase()}`}
                 >
                   {page}
                 </Link>
