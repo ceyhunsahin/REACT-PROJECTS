@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 import { useParams, useLoaderData, useLocation, useNavigate, redirect,Link } from "react-router-dom";
-import { getRecipeDetails } from "../../util";
+import { getRecipeDetails,extractParamsFromString } from "../../util";
 import { Typography } from "@mui/material";
 import { Container } from "@mui/joy";
 import { Stack, Box } from "@mui/system";
 import BackArrow from "./BackArrow";
+
 
 
 export function loader({ params }) {
@@ -16,7 +17,7 @@ export default function RecipeDetail() {
   const { id } = useParams();
   const location = useLocation();
   const data = useLoaderData();
-  console.log('datadatadatdtadtadtatd', data)
+  console.log('datadatadatdtadtadtatd', location)
   const [showAllDigest, setShowAllDigest] = useState(false);
   const [showAllingredients, setShowAllIngredients] = useState(false)
 
@@ -32,16 +33,20 @@ export default function RecipeDetail() {
   const visibleItemsIngredients = showAllingredients? data[0].recipe.ingredientLines : data[0].recipe.ingredientLines.slice(0, 5);
 
   const search = location.state?.search ;
+  console.log("search detail",search)
   
-  console.log("search", search)
+  const extractedParams = extractParamsFromString(search);
+
+  console.log("extractedParams extractedParams ",extractedParams.mealType)
 
   return (
     <>
         <Link
         to={search === '' ? "/recipes" : `../?${search}`}
         relative="path"
+        style = {{ textDecoration: "none", color: "inherit", fontWeight: "bold", fontSize: "20px" }}
       >
-        Back to {search?.split("&")[0]?.split("=")[1]} {search?.split("&")[1]?.split("=")[1]}
+        Back to {extractedParams?.q} recipes for {typeof extractedParams.mealType === 'string' ? extractedParams.mealType : extractedParams?.mealType?.join(", ") }
       </Link>
       <Typography variant="h4" fontWeight='bold' fontSize={'2.5rem'} align="center">
         {data[0].recipe.label}

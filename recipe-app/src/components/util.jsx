@@ -48,3 +48,30 @@ export const getRecipeDetails = async (id) => {
     const response = await axios.get(fullUrl)
     return response.data.hits
 }
+
+
+export function extractParamsFromString(inputString) {
+    const params = {};
+
+    console.log("inputString", inputString)
+  
+    // Parametreleri "&" ile ayır
+    const paramArray = inputString.split("&");
+  
+    // Her bir parametreyi incele
+    paramArray.forEach((param) => {
+      // "=" ile ayır ve sadece '=' den sonraki kısmı al
+      const [key, value] = param.split("=");
+  
+      // Eğer key zaten mevcutsa, value'yu bir dizi içine ekle
+      if (params[key]) {
+        params[key] = Array.isArray(params[key])
+          ? [...params[key], value]
+          : [params[key], value];
+      } else {
+        params[key] = value;
+      }
+    });
+  
+    return params;
+  }

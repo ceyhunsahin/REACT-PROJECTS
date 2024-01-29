@@ -28,6 +28,8 @@ import DetailShareActions from "./DetailPages/DetailShareActions";
 export function loader({ request }) {
   const urlParts = request.url?.split('?');
 
+  
+
 
   if (urlParts?.length === 2) {
     const queryParams = urlParts[1].split('&');
@@ -155,14 +157,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function Recipes() {
   const data = useLoaderData().hits;
 
-
-  console.log("data", data);
   const [loading, setLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState("");
   const [mealsName, setMealsName] = useState([]);
-  console.log("mealsName11111111111111", mealsName[0]);
-  console.log("searchParamsssssssssss",searchParams)
 
 
   
@@ -170,8 +168,7 @@ function Recipes() {
 
   function handleClick() {
     setLoading(false);
-    setTimeout(() => setLoading(true), 2000);
-    console.log("queryryryryryryrsdvsqdfqsqsfqsdfdqsf", query);
+    setTimeout(() => setLoading(true), 1000);
   
     setSearchParams((prevSearchParams) => {
       const updatedSearchParams = {
@@ -203,7 +200,7 @@ function Recipes() {
     );
 
   };
-  console.log("mealsNAMEEEEeeee", mealsName);
+
 
   const handleSearchChange = (event) => {
     const {
@@ -222,23 +219,22 @@ function Recipes() {
   const searchParamsNew = new URLSearchParams(location.search);
   const queryFromParams = searchParamsNew.get('q');
   const mealTypeFromParams = searchParamsNew.getAll('mealType');
+  const fbclid = searchParamsNew.get('fbclid');
+
 
 
   console.log("searchParamsNew",mealTypeFromParams);
   useEffect(() => {
- 
-
-    // Bu değerleri state'e set edebilirsiniz
     setQuery(queryFromParams || '');
     setMealsName(mealTypeFromParams );
   }, [location.search]);
 
 
-  const shareActions = () => {
+  const handleDelete = (value) => {
+    const updatedSelected = mealsName.filter((selectedValue) => selectedValue !== value);
 
-    return ( <DetailShareActions />)
-
-  }
+    setMealsName(updatedSelected);
+  };
 
 
 
@@ -300,7 +296,18 @@ function Recipes() {
             renderValue={(selected) => (
               <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                 {selected.map((value) => (
-                  <Chip key={value} label={value} />
+                  <Chip  
+                      label={value} 
+                      key={value} 
+                      color="secondary"
+                      //variant="outlined"
+                      onDelete={(e) => handleDelete(value)} 
+                      onClick={(e) => e.stopPropagation()}  
+                      onMouseDown={(e) => e.stopPropagation()} 
+                      sx={{ mr: 1, mb: 1, "&:hover": { backgroundColor: "#e0e0e0" } }}
+                    
+                      
+                  />
                 ))}
               </Box>
             )}
@@ -334,35 +341,28 @@ function Recipes() {
       }}
         >
          {data.map((item) => (
-          <Link  to={extractIdFromUri(`${item.recipe.uri}`)}
-                 key={extractIdFromUri(item.recipe.uri)}
-                 style={{ textDecoration: "none", color: "inherit"  }}
-                 state={{
-                      search: `${searchParams.toString()}`,
-                  }}
-                 >
-          
-          <Card sx={{ width: 345, height:350 , marginTop: 3}} 
-                key = {extractIdFromUri(item.recipe.uri)}>
-            <CardMedia
-              sx={{ height: 180 }}
-              image={item.recipe.image}
-              title={item.recipe.label}
-            />
-            <CardContent sx = {{height: 80}}>
-              <Typography gutterBottom variant="h5" component="div">
-              {item.recipe.label}
-              </Typography>
-            </CardContent>
-            <Box >
-              <CardActions sx = {{display:'flex', flexDirection:'row', justifyContent:'space-evenly'}}>
-                <Button size="small" onClick = {shareActions}>Share</Button>
-                <Button size="small">Learn More</Button>
-              </CardActions>
+          <Card sx={{ width: 345, height: 350, marginTop: 3 }} key={extractIdFromUri(item.recipe.uri)}>
+            <Link
+              to={extractIdFromUri(`${item.recipe.uri}`)}
+              style={{ textDecoration: "none", color: "inherit" }}
+              state={{
+                search: `${searchParams.toString()}`,
+              }}
+            >
+              <CardMedia sx={{ height: 180 }} image={item.recipe.image} title={item.recipe.label} />
+              <CardContent sx={{ height: 80 }}>
+                <Typography gutterBottom variant="h5" component="div">
+                  {item.recipe.label}
+                </Typography>
+              </CardContent>
+            </Link>
+            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
+              <DetailShareActions id = {extractIdFromUri(`${item.recipe.uri}`)} />
+              <Button size="small">Learn More</Button>
             </Box>
           </Card>
-          </Link>
-          ))}
+        ))}
+
           
 
         </Stack>
