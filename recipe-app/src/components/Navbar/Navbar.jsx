@@ -16,6 +16,7 @@ import { SvgIcon } from "@mui/material";
 import { styled } from "@mui/system";
 import { NavLink, Link } from "react-router-dom";
 import { useId } from "react";
+import "../../assets/styles.css"
 
 
 const pages = ["recipes", "about", "github"];
@@ -49,9 +50,9 @@ function Navbar() {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl" style = {{backgroundColor:'#D3B59B'}}>
-        <Toolbar disableGutters>
-          <Link to="/" sx={{ cursor: "pointer" }}>
+      <div style = {{backgroundColor:'#D3B59B'}}>
+        <Toolbar disableGutters sx = {{mx:4}}>
+          <Link to="/" sx={{ cursor: "pointer"}}>
             <SvgIcon sx={{ display: { xs: "none", md: "flex" }, xl: 1 }}>
               <svg
                 version="1.0"
@@ -89,13 +90,13 @@ function Navbar() {
           </Link>
           <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
           <Typography
-            variant="h5"
+            variant="h4"
             noWrap
             onClick={handleHomeMenu}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
+              fontFamily: "Courant",
               fontWeight: 700,
               letterSpacing: ".2rem",
               color: "#e51a59",
@@ -231,7 +232,7 @@ function Navbar() {
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
+              fontFamily: "Courant",
               fontWeight: 700,
               letterSpacing: ".3rem",
               textDecoration: "none",
@@ -275,7 +276,7 @@ function Navbar() {
                 }}
               >
                 <Link
-                  style={{ textDecoration: "none", color: "white"}}
+                  style={{ textDecoration: "none", color: "#e51a59", fontFamily:"Courant", fontWeight: 700, letterSpacing: ".2rem", fontSize: "1.5rem" }} 
                   key={`${page}-${id}`}
                   onClick={handleCloseNavMenu}
                   to={`/${page.toLowerCase()}`}
@@ -316,7 +317,7 @@ function Navbar() {
             </Menu>
           </Box>
         </Toolbar>
-      </Container>
+      </div>
     </AppBar>
   );
 }

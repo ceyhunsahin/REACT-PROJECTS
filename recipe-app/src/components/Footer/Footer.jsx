@@ -13,12 +13,10 @@ function Footer() {
             width: "100%",
             height: "auto",
             backgroundColor: "text.disabled",
-            paddingTop: "1rem",
-            paddingBottom: "1rem",
-            position:'static',
+            position: "sticky",
             bottom: 0,
-            left: 0,
-            right: 0,
+            padding: "10px",
+            textAlign: "center",
           }}
         >
           <Container maxWidth="lg">

@@ -34,8 +34,10 @@ export default function RecipeDetail() {
 
   const search = location.state?.search ;
   console.log("search detail",search)
+
+  const newSearch = location.pathname.split('/')[2];
   
-  const extractedParams = extractParamsFromString(search);
+  const extractedParams = newSearch;
 
   console.log("extractedParams extractedParams ",extractedParams.mealType)
 
@@ -46,7 +48,7 @@ export default function RecipeDetail() {
         relative="path"
         style = {{ textDecoration: "none", color: "inherit", fontWeight: "bold", fontSize: "20px" }}
       >
-        Back to {extractedParams?.q} recipes for {typeof extractedParams.mealType === 'string' ? extractedParams.mealType : extractedParams?.mealType?.join(", ") }
+        Back to Recipes
       </Link>
       <Typography variant="h4" fontWeight='bold' fontSize={'2.5rem'} align="center">
         {data[0].recipe.label}

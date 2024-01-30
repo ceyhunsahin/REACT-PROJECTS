@@ -13,6 +13,7 @@ import Twitter from "../../../../assets/twitter.png"
 
 
 const DetailShareActions = ({id}) => {
+
         
         const [anchorEl, setAnchorEl] = useState(null);
       
@@ -37,7 +38,7 @@ const DetailShareActions = ({id}) => {
               href: `https://42a0-2a01-e0a-80a-97b0-3534-9503-3844-26e5.ngrok-free.app/recipes/${id}`, // Share the current page URL
             }, function(response){});
           };
-      
+        // TODO Instagram and Twitter Link here, FB done
         return (
           <>
             <Button size="small" onClick={handleClick}>
@@ -56,7 +57,7 @@ const DetailShareActions = ({id}) => {
                 horizontal: 'center',
               }}
               
-            >
+            > 
               <List sx={{ display: 'flex', flexDirection: 'row', gap: '1rem', padding: '1rem', cursor:'pointer' }}>
                 {socialMediaIcons.map((socialMedia, index) => (
                   <ListItem key={index} onClick={() => handleSocialMediaClick(socialMedia.name)} sx={{ cursor: 'pointer' }} >
@@ -74,6 +75,7 @@ const DetailShareActions = ({id}) => {
                                 },
                                 }} />
                     </Button>
+                    
                   </ListItem>
                 ))}
               </List>
