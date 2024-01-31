@@ -14,7 +14,6 @@ import Github from './components/pages/Github';
 import Recipes, {loader as RecipeLoader} from './components/pages/RecipePage/Recipes';
 import RecipeDetail , {loader as recipeDetailLoader} from "./components/pages/RecipePage/RecipeDetail";
 import Error from './components/pages/RecipePage/ErrorRecipe';
-import DetailShareActions from "./components/pages/RecipePage/DetailPages/DetailShareActions";
 import Signup from "./components/pages/Signup";
 import Signin from "./components/pages/Signin";
 import RecipeAdd from "./components/pages/RecipeAdd";

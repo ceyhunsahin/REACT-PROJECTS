@@ -34,6 +34,7 @@ function Navbar() {
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [auth, setAuth] = React.useState(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -261,17 +262,8 @@ function Navbar() {
             </StyledNavLink>
           </Box>
 
-
-          <Box sx={{ flexGrow: 0 }}>
-
-                <StyledNavLink to= "/signup" >
- 
-                  <StyledTypo variant='h4'>Sign Up</StyledTypo>
-                </StyledNavLink>
-
-          </Box>
-
-          {/* <Box sx={{ flexGrow: 0 }}>
+          {auth ? (
+            <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Ceyhun" src="/static/images/avatar/2.jpg" />
@@ -299,7 +291,19 @@ function Navbar() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box> */}
+          </Box> 
+          )
+            : 
+          <Box sx={{ flexGrow: 0 }}>
+
+                <StyledNavLink to= "/signup" >
+ 
+                  <StyledTypo variant='h4'>Sign Up</StyledTypo>
+                </StyledNavLink>
+
+          </Box>
+
+          }
         </Toolbar>
       </div>
     </AppBar>
