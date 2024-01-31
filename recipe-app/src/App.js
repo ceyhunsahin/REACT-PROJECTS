@@ -17,6 +17,7 @@ import Error from './components/pages/RecipePage/ErrorRecipe';
 import DetailShareActions from "./components/pages/RecipePage/DetailPages/DetailShareActions";
 import Signup from "./components/pages/Signup";
 import Signin from "./components/pages/Signin";
+import RecipeAdd from "./components/pages/RecipeAdd";
 
 
 
@@ -45,6 +46,10 @@ const router = createBrowserRouter(
       <Route
         path="signin"
         element={<Signin />}
+      />
+        <Route
+        path="addrecipe"
+        element={<RecipeAdd />}
       />
 
        

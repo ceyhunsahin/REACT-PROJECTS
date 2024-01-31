@@ -255,7 +255,12 @@ function Navbar() {
                 </StyledNavLink>
         
             ))}
+            <StyledNavLink to= "/addrecipe" >
+
+            <StyledTypo variant='h4'>Add Recipe</StyledTypo>
+            </StyledNavLink>
           </Box>
+
 
           <Box sx={{ flexGrow: 0 }}>
 

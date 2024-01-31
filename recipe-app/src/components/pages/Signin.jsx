@@ -7,34 +7,46 @@ import {
   Link,
   Grid,
 } from '@mui/material';
+import * as Yup from "yup";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 export default function Signin() {
 
-    const [formData, setFormData] = useState({
+    const initialValues = {
+
         email: '',
         password: '',
+
+        
+      };
+    
+      const validationSchema = Yup.object({
+
+        email: Yup.string().email().required(),
+        password: Yup.string().trim().required(),
+
       });
     
-      const handleChange = (e) => {
-        setFormData({
-          ...formData,
-          [e.target.name]: e.target.value,
-        });
-      };
     
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        // Handle form submission logic here (e.g., send data to the server)
-        console.log('Form submitted:', formData);
-      };
+      const renderError = (message) => <p className="help is-danger">{message}</p>;
+        const onSubmit = (values) => {
+            alert(JSON.stringify(values, null, 2));
+        };
     return (
+        <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={async (values, { resetForm }) => {
+                    await onSubmit(values);
+                    resetForm();
+                }}>
         <Container component="main" maxWidth="xs">
         <div>
           <Typography variant="h5" align="center">
             Sign Up
           </Typography>
-          <form onSubmit={handleSubmit}>
-          <TextField
+          <Form >
+          <Field as ={TextField}
             variant="outlined"
             margin="normal"
             fullWidth
@@ -42,9 +54,10 @@ export default function Signin() {
             label="Email Address"
             name="email"
             autoComplete="email"
-            onChange={handleChange}
+           
           />
-            <TextField
+          <ErrorMessage name="email" render={renderError} />
+            <Field as ={TextField}
               variant="outlined"
               margin="normal"
               fullWidth
@@ -53,8 +66,9 @@ export default function Signin() {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={handleChange}
+      
             />
+            <ErrorMessage name="password" render={renderError} />
 
             <Button
               type="submit"
@@ -65,15 +79,17 @@ export default function Signin() {
             >
               Sign In
             </Button>
-          </form>
+          </Form>
           <Grid container justifyContent="flex-end">
-            <Grid item>
-              <Link href="/signin" variant="body2">
-                Already have an account? Log in
+            <Grid item sx = {{mt:3, mb:3}}>
+              <Link href="/signup" variant="body2">
+                If you don't have an account? Log in
               </Link>
             </Grid>
           </Grid>
         </div>
       </Container>
+
+      </Formik>
     )
 }
