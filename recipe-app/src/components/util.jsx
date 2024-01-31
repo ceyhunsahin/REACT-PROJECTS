@@ -75,3 +75,26 @@ export function extractParamsFromString(inputString) {
   
     return params;
   }
+
+  export function extractParamsFromStringAsList(inputString) {
+
+    const paramArrayList = [];
+
+    console.log("inputString", inputString)
+  
+    // Parametreleri "&" ile ayır
+    const paramArray = inputString.search.split("&");
+  
+    // Her bir parametreyi incele
+    paramArray.forEach((param) => {
+      // "=" ile ayır ve sadece '=' den sonraki kısmı al
+      const [key, value] = param.split("=");
+      paramArrayList.push(value);
+
+    });
+
+    return paramArrayList;
+
+  
+    
+  }

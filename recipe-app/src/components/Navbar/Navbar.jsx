@@ -16,7 +16,13 @@ import { SvgIcon } from "@mui/material";
 import { styled } from "@mui/system";
 import { NavLink, Link } from "react-router-dom";
 import { useId } from "react";
-import "../../assets/styles.css"
+import "../../assets/styles.css";
+import Signup from "../pages/Signup";
+import {StyledNavLink, StyledTypo, StyledLittleTypo} from "./styleNavbar";
+
+
+
+
 
 
 const pages = ["recipes", "about", "github"];
@@ -47,6 +53,8 @@ function Navbar() {
   const handleHomeMenu = () => {
     return null
   };
+
+
 
   return (
     <AppBar position="static">
@@ -158,30 +166,9 @@ function Navbar() {
                     to={`/${page.toLowerCase()}`}
                     style={{ textDecoration: "none"}}
                   >
-                    <Typography
-                      sx={{
-                        fontWeight: 100,
-                        color: "#e51a59",
-                        
-                        cursor: "pointer",
-                        
-              "&:hover": {
-                       color: "blue",
-                          transition: "all 0.2s ease-in-out",
-                        },
-                        "&:visited": {
-                          color: "blue",
-                        },
-                        "&:active": {
-                          color: "orange",
-                        },
-                        textAlign: "center",
-                      
-
-                      }}
-                    >
+                    <StyledLittleTypo variant = 'h5'>
                       {page}
-                    </Typography>
+                    </StyledLittleTypo>
                   </Link>
                 </MenuItem>
               ))}
@@ -225,7 +212,7 @@ function Navbar() {
           </Link>
 
           <Typography
-            variant="h5"
+            variant="h4"
             noWrap
             onClick={handleHomeMenu}
             sx={{
@@ -258,36 +245,28 @@ function Navbar() {
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                sx={{
-                  my: 2,
-                  display: "block",
-
-                  cursor: "pointer",
-
-                  "&:hover": {
-                    color: "green",
-                    transition: "all 0.2s ease-in-out",
-                  },
-                  "&:active": {
-                          color: "orange",
-                        },
-                }}
-              >
-                <Link
-                  style={{ textDecoration: "none", color: "#e51a59", fontFamily:"Courant", fontWeight: 700, letterSpacing: ".2rem", fontSize: "1.5rem" }} 
+             
+                <StyledNavLink
                   key={`${page}-${id}`}
                   onClick={handleCloseNavMenu}
                   to={`/${page.toLowerCase()}`}
                 >
-                  {page}
-                </Link>
-              </Button>
+                  <StyledTypo variant='h4'>{page}</StyledTypo>
+                </StyledNavLink>
+        
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
+
+                <StyledNavLink to= "/signup" >
+ 
+                  <StyledTypo variant='h4'>Sign Up</StyledTypo>
+                </StyledNavLink>
+
+          </Box>
+
+          {/* <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Ceyhun" src="/static/images/avatar/2.jpg" />
@@ -315,7 +294,7 @@ function Navbar() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box> */}
         </Toolbar>
       </div>
     </AppBar>

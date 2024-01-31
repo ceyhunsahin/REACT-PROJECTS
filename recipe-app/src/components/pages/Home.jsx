@@ -4,6 +4,7 @@ import { purple } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
 import '../../assets/styles.css'
 import { Link } from "react-router-dom";
+import { StyledNavLink } from "../Navbar/styleNavbar";
 
 const ColorButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(purple[500]),
@@ -108,9 +109,11 @@ const Home = () => {
             fontWeight: 300 }}>
             Join our community for exclusive recipes, tips, and more!
           </Typography>
-          <ColorButton variant="contained">
-            Sign Up Now
+          <StyledNavLink to ="/signup">
+            <ColorButton variant="contained">
+              Sign Up Now
             </ColorButton>
+          </StyledNavLink>
         </Box>
       </Stack>
           </Box>

@@ -5,6 +5,7 @@ import { Typography } from "@mui/material";
 import { Container } from "@mui/joy";
 import { Stack, Box } from "@mui/system";
 import BackArrow from "./BackArrow";
+import { ReturnPage } from "./DetailPages/ReturnPage";
 
 
 
@@ -43,13 +44,13 @@ export default function RecipeDetail() {
 
   return (
     <>
-        <Link
+{/*         <Link
         to={search === '' ? "/recipes" : `../?${search}`}
         relative="path"
         style = {{ textDecoration: "none", color: "inherit", fontWeight: "bold", fontSize: "20px" }}
-      >
-        Back to Recipes
-      </Link>
+      > */}
+        <ReturnPage search = {search}/>
+      
       <Typography variant="h4" fontWeight='bold' fontSize={'2.5rem'} align="center">
         {data[0].recipe.label}
       </Typography>
