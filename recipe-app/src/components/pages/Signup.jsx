@@ -224,7 +224,7 @@ const Signup = () => {
               margin="normal"
               fullWidth
               name="repassword"
-              label="Rewrite your Password"
+              label="Confirm Password"
               type="password"
               id="repassword"
               autoComplete="current-password"
@@ -242,7 +242,7 @@ const Signup = () => {
           </Form>
           <Grid container justifyContent="flex-end">
             <Grid item sx={{ mt: 3, mb: 3 }}>
-              <Link href="/signin" variant="body2">
+              <Link href="/login" variant="body2">
                 Already have an account? Log in
               </Link>
             </Grid>

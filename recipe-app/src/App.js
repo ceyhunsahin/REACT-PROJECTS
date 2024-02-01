@@ -16,7 +16,7 @@ import RecipeDetail , {loader as recipeDetailLoader} from "./components/pages/Re
 import Error from './components/pages/RecipePage/ErrorRecipe';
 import Signup from "./components/pages/Signup";
 import Signin from "./components/pages/Signin";
-import RecipeAdd from "./components/pages/RecipeAdd";
+import RecipeAdd, {loader as recipeAddLoader} from "./components/pages/RecipeAdd";
 import VerifyEmail from "./components/Firebase/VerifyEmail";
 
 
@@ -52,6 +52,7 @@ const router = createBrowserRouter(
       <Route
         path="addrecipe"
         element={<RecipeAdd />}
+        loader={recipeAddLoader}
       />
       <Route
         path="verify-email"

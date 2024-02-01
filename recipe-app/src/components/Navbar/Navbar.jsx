@@ -23,6 +23,7 @@ import { getAuth,signOut } from 'firebase/auth';
 
 import { useAuth } from '../Firebase/AuthContext';
 import { useNavigate } from "react-router-dom";
+import { auth } from "firebaseui";
 
 
 const pages = ["recipes", "about", "github"];
@@ -69,7 +70,7 @@ function Navbar() {
     console.log('situationOfProfil ',situationOfProfil )
     if(situationOfProfil==='Logout') {
     setAuthUser('');
-        console.log("NAvbar Auth logout sonrasi", setAuthUser );
+        console.log("NAvbar Auth logout sonrasi", user);
         // User is signed in
         return navigate("/");
      
