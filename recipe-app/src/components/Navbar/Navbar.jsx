@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useState, useEffect} from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -19,10 +19,10 @@ import { useId } from "react";
 import "../../assets/styles.css";
 import Signup from "../pages/Signup";
 import {StyledNavLink, StyledTypo, StyledLittleTypo} from "./styleNavbar";
+import { getAuth,signOut } from 'firebase/auth';
 
-
-
-
+import { useAuth } from '../Firebase/AuthContext';
+import { useNavigate } from "react-router-dom";
 
 
 const pages = ["recipes", "about", "github"];
@@ -31,10 +31,18 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
   const id = useId();
+  const navigate = useNavigate();
+
+  const { user } = useAuth();
+  const { setAuthUser } = useAuth();
+
+  console.log("NAvbar user value", user );
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [auth, setAuth] = React.useState(false);
+  
+
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -47,13 +55,32 @@ function Navbar() {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+/*   useEffect(() => {
+    // This function will be called when the component mounts
+    // and whenever auth changes
+
+    console.log('auth changed:', auth);
+  }, [auth]); */
+
+
+  const handleCloseUserMenu = (e) => {
     setAnchorElUser(null);
+    const situationOfProfil = e.target.textContent
+    console.log('situationOfProfil ',situationOfProfil )
+    if(situationOfProfil==='Logout') {
+    setAuthUser('');
+        console.log("NAvbar Auth logout sonrasi", setAuthUser );
+        // User is signed in
+        return navigate("/");
+     
+    }
   };
 
   const handleHomeMenu = () => {
     return null
   };
+
+ 
 
 
 
@@ -262,13 +289,9 @@ function Navbar() {
             </StyledNavLink>
           </Box>
 
-          {auth ? (
+
             <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Ceyhun" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
+
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
@@ -284,26 +307,41 @@ function Navbar() {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
+              
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign="center" >{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box> 
-          )
-            : 
-          <Box sx={{ flexGrow: 0 }}>
-
+        {!user ? (
+          <Box  sx={{ flexGrow: 0, display: { xs: "none", md: "flex" }}}>
+          
+  
                 <StyledNavLink to= "/signup" >
- 
-                  <StyledTypo variant='h4'>Sign Up</StyledTypo>
+  
+                <StyledTypo variant='h4'>Sign Up</StyledTypo>
                 </StyledNavLink>
+                
+                <StyledNavLink to= "/login" >
+  
+                <StyledTypo variant='h4'>Log In</StyledTypo>
+                </StyledNavLink>
+                
+            </Box>
+            )
+            : (
+              <Box sx={{ flexGrow: 0 }}>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+             {/*  <Avatar alt={"ceyhun"}  src={"ceyhun"} /> */}
+                <Avatar alt={user ? `${user.displayName}` : 'Anonymous'}  src={user ? `${user?.photoURL}` : null} />
+              </IconButton>
+              </Box>
+              )}
 
-          </Box>
-
-          }
+          
         </Toolbar>
       </div>
     </AppBar>

@@ -17,6 +17,9 @@ import Error from './components/pages/RecipePage/ErrorRecipe';
 import Signup from "./components/pages/Signup";
 import Signin from "./components/pages/Signin";
 import RecipeAdd from "./components/pages/RecipeAdd";
+import VerifyEmail from "./components/Firebase/VerifyEmail";
+
+
 
 
 
@@ -43,12 +46,16 @@ const router = createBrowserRouter(
         element={<Signup />}
       />
       <Route
-        path="signin"
+        path="login"
         element={<Signin />}
       />
-        <Route
+      <Route
         path="addrecipe"
         element={<RecipeAdd />}
+      />
+      <Route
+        path="verify-email"
+        element={<VerifyEmail/>}
       />
 
        

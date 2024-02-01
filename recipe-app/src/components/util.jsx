@@ -95,6 +95,29 @@ export function extractParamsFromString(inputString) {
 
     return paramArrayList;
 
-  
+
     
+  }
+
+  export function getParameterByName( name ){
+    name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+    var regexS = "[\\?&]"+name+"=([^&#]*)";
+    var regex = new RegExp( regexS );
+    var results = regex.exec( window.location.href );
+    if( results == null )
+      return "";
+    else
+      return decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
+
+  export function handleResetPassword (auth, actionCode, continueUrl, lang) {
+    return auth.sendPasswordResetEmail(actionCode, continueUrl, lang);
+  }
+
+  export function handleRecoverEmail(auth, actionCode, lang) {
+    return auth.sendEmailVerification(actionCode, lang);
+  }
+
+  export function handleVerifyEmail(auth, actionCode, continueUrl, lang) {
+    return auth.confirmPasswordReset(actionCode, continueUrl, lang);
   }

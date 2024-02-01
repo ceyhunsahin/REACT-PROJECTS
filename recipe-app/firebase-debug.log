@@ -1,0 +1,364 @@
+[debug] [2024-02-01T13:29:41.240Z] ----------------------------------------------------------------------
+[debug] [2024-02-01T13:29:41.242Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init
+[debug] [2024-02-01T13:29:41.242Z] CLI Version:   13.1.0
+[debug] [2024-02-01T13:29:41.242Z] Platform:      darwin
+[debug] [2024-02-01T13:29:41.243Z] Node Version:  v20.10.0
+[debug] [2024-02-01T13:29:41.243Z] Time:          Thu Feb 01 2024 14:29:41 GMT+0100 (UTC+01:00)
+[debug] [2024-02-01T13:29:41.243Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-02-01T13:29:41.246Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-02-01T13:29:41.246Z] > authorizing via signed-in user (csahin17072010@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/ceyhun/REACT-PROJECTS/recipe-app
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2024-02-01T13:29:57.134Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2024-02-01T13:29:57.813Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2024-02-01T13:29:57.813Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project recipe-app-8e99b (recipe-app) 
+[info] 
+=== Hosting Setup
+[debug] [2024-02-01T13:30:08.135Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/recipe-app-8e99b [none]
+[debug] [2024-02-01T13:30:08.373Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/recipe-app-8e99b 200
+[debug] [2024-02-01T13:30:08.373Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/recipe-app-8e99b {"projectId":"recipe-app-8e99b","projectNumber":"962704786973","displayName":"recipe-app","name":"projects/recipe-app-8e99b","resources":{"hostingSite":"recipe-app-8e99b"},"state":"ACTIVE","etag":"1_5703615d-528a-4b0d-ad4b-cf6aa1c2a828"}
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[debug] [2024-02-01T13:30:26.988Z] >>> [apiv2][query] GET https://www.gstatic.com/firebasejs/releases.json [none]
+[debug] [2024-02-01T13:30:27.042Z] <<< [apiv2][status] GET https://www.gstatic.com/firebasejs/releases.json 200
+[debug] [2024-02-01T13:30:27.042Z] <<< [apiv2][body] GET https://www.gstatic.com/firebasejs/releases.json {"current":{"version":"10.7.2","browserURL":"https://www.gstatic.com/firebasejs/10.7.2/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/10.7.2/firebase.tgz"},"live":{"version":"10.7","browserURL":"https://www.gstatic.com/firebasejs/live/10.7/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/live/10.7/firebase.tgz"},"components":{"analytics":"https://www.gstatic.com/firebasejs/10.7.2/firebase-analytics.js","app":"https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js","app-check":"https://www.gstatic.com/firebasejs/10.7.2/firebase-app-check.js","auth":"https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js","auth/cordova":"https://www.gstatic.com/firebasejs/10.7.2/firebase-auth/cordova.js","functions":"https://www.gstatic.com/firebasejs/10.7.2/firebase-functions.js","firestore":"https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js","firestore/lite":"https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore/lite.js","installations":"https://www.gstatic.com/firebasejs/10.7.2/firebase-installations.js","storage":"https://www.gstatic.com/firebasejs/10.7.2/firebase-storage.js","performance":"https://www.gstatic.com/firebasejs/10.7.2/firebase-performance.js","remote-config":"https://www.gstatic.com/firebasejs/10.7.2/firebase-remote-config.js","messaging":"https://www.gstatic.com/firebasejs/10.7.2/firebase-messaging.js","messaging/sw":"https://www.gstatic.com/firebasejs/10.7.2/firebase-messaging/sw.js","database":"https://www.gstatic.com/firebasejs/10.7.2/firebase-database.js","firestore.memory":"https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.memory.js"}}
+[info] ✔  Wrote Y/index.html 
+[info] 
+[info] i  Detected a .git folder at /Users/ceyhun/REACT-PROJECTS 
+[info] i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=57449686&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+[info] 
+[info] Waiting for authentication...
+[debug] [2024-02-01T13:30:38.591Z] >>> [apiv2][query] POST https://github.com/login/oauth/access_token [none]
+[debug] [2024-02-01T13:30:38.592Z] >>> [apiv2][body] POST https://github.com/login/oauth/access_token [stream]
+[debug] [2024-02-01T13:30:38.846Z] <<< [apiv2][status] POST https://github.com/login/oauth/access_token 200
+[debug] [2024-02-01T13:30:38.846Z] <<< [apiv2][body] POST https://github.com/login/oauth/access_token {"access_token":"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","token_type":"bearer","scope":"read:user,repo"}
+[debug] [2024-02-01T13:30:38.853Z] >>> [apiv2][query] GET https://api.github.com/user [none]
+[debug] [2024-02-01T13:30:39.221Z] <<< [apiv2][status] GET https://api.github.com/user 200
+[debug] [2024-02-01T13:30:39.221Z] <<< [apiv2][body] GET https://api.github.com/user {"login":"ceyhunsahin","id":67160612,"node_id":"MDQ6VXNlcjY3MTYwNjEy","avatar_url":"https://avatars.githubusercontent.com/u/67160612?v=4","gravatar_id":"","url":"https://api.github.com/users/ceyhunsahin","html_url":"https://github.com/ceyhunsahin","followers_url":"https://api.github.com/users/ceyhunsahin/followers","following_url":"https://api.github.com/users/ceyhunsahin/following{/other_user}","gists_url":"https://api.github.com/users/ceyhunsahin/gists{/gist_id}","starred_url":"https://api.github.com/users/ceyhunsahin/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/ceyhunsahin/subscriptions","organizations_url":"https://api.github.com/users/ceyhunsahin/orgs","repos_url":"https://api.github.com/users/ceyhunsahin/repos","events_url":"https://api.github.com/users/ceyhunsahin/events{/privacy}","received_events_url":"https://api.github.com/users/ceyhunsahin/received_events","type":"User","site_admin":false,"name":"Ceyhun Sahin","company":null,"blog":"","location":null,"email":null,"hireable":null,"bio":"Data Scientist","twitter_username":null,"public_repos":55,"public_gists":0,"followers":41,"following":44,"created_at":"2020-06-19T15:50:52Z","updated_at":"2024-01-28T13:28:39Z","private_gists":0,"total_private_repos":13,"owned_private_repos":13,"disk_usage":907420,"collaborators":0,"two_factor_authentication":false,"plan":{"name":"free","space":976562499,"collaborators":0,"private_repos":10000}}
+[info] 
+[info] ✔  Success! Logged into GitHub as ceyhunsahin 
+[info] 
+[debug] [2024-02-01T13:30:54.573Z] >>> [apiv2][query] GET https://api.github.com/repos/recipe-app/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:30:54.780Z] <<< [apiv2][status] GET https://api.github.com/repos/recipe-app/actions/secrets/public-key 404
+[debug] [2024-02-01T13:30:54.780Z] <<< [apiv2][body] GET https://api.github.com/repos/recipe-app/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:30:56.079Z] >>> [apiv2][query] GET https://api.github.com/repos/recipe-app/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:30:56.233Z] <<< [apiv2][status] GET https://api.github.com/repos/recipe-app/actions/secrets/public-key 404
+[debug] [2024-02-01T13:30:56.234Z] <<< [apiv2][body] GET https://api.github.com/repos/recipe-app/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:31:18.693Z] >>> [apiv2][query] GET https://api.github.com/repos/main/recipe-app/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:31:18.903Z] <<< [apiv2][status] GET https://api.github.com/repos/main/recipe-app/actions/secrets/public-key 404
+[debug] [2024-02-01T13:31:18.903Z] <<< [apiv2][body] GET https://api.github.com/repos/main/recipe-app/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest/actions/secrets#get-a-repository-public-key"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:31:25.083Z] >>> [apiv2][query] GET https://api.github.com/repos/recipe-app/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:31:25.281Z] <<< [apiv2][status] GET https://api.github.com/repos/recipe-app/actions/secrets/public-key 404
+[debug] [2024-02-01T13:31:25.281Z] <<< [apiv2][body] GET https://api.github.com/repos/recipe-app/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:31:41.665Z] >>> [apiv2][query] GET https://api.github.com/repos/master/recipe-app/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:31:41.849Z] <<< [apiv2][status] GET https://api.github.com/repos/master/recipe-app/actions/secrets/public-key 404
+[debug] [2024-02-01T13:31:41.849Z] <<< [apiv2][body] GET https://api.github.com/repos/master/recipe-app/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest/actions/secrets#get-a-repository-public-key"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:31:48.954Z] >>> [apiv2][query] GET https://api.github.com/repos/ceyhun/recipe-app/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:31:49.157Z] <<< [apiv2][status] GET https://api.github.com/repos/ceyhun/recipe-app/actions/secrets/public-key 404
+[debug] [2024-02-01T13:31:49.158Z] <<< [apiv2][body] GET https://api.github.com/repos/ceyhun/recipe-app/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest/actions/secrets#get-a-repository-public-key"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:31:53.984Z] >>> [apiv2][query] GET https://api.github.com/repos/ceyhunsahin/recipe-app/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:31:54.165Z] <<< [apiv2][status] GET https://api.github.com/repos/ceyhunsahin/recipe-app/actions/secrets/public-key 404
+[debug] [2024-02-01T13:31:54.165Z] <<< [apiv2][body] GET https://api.github.com/repos/ceyhunsahin/recipe-app/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest/actions/secrets#get-a-repository-public-key"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:33:33.301Z] >>> [apiv2][query] GET https://api.github.com/repos/ceyhunsahin//actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:33:33.303Z] >>> [apiv2][query] GET https://api.github.com/repos/Go to file/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:33:33.304Z] >>> [apiv2][query] GET https://api.github.com/repos/t/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:33:33.305Z] >>> [apiv2][query] GET https://api.github.com/repos/.idea/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:33:33.307Z] >>> [apiv2][query] GET https://api.github.com/repos/fakestore/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:33:33.308Z] >>> [apiv2][query] GET https://api.github.com/repos/rc11-task-tracker-solution/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:33:33.309Z] >>> [apiv2][query] GET https://api.github.com/repos/recipe-app/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:33:33.310Z] >>> [apiv2][query] GET https://api.github.com/repos/.idea/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:33:33.312Z] >>> [apiv2][query] GET https://api.github.com/repos/public/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:33:33.313Z] >>> [apiv2][query] GET https://api.github.com/repos/src/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:33:33.315Z] >>> [apiv2][query] GET https://api.github.com/repos/.gitignore/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:33:33.316Z] >>> [apiv2][query] GET https://api.github.com/repos/README.md/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:33:33.317Z] >>> [apiv2][query] GET https://api.github.com/repos/package-lock.json/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:33:33.318Z] >>> [apiv2][query] GET https://api.github.com/repos/package.json/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:33:33.319Z] >>> [apiv2][query] GET https://api.github.com/repos/yarn.lock/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:33:33.321Z] >>> [apiv2][query] GET https://api.github.com/repos/task-tracker/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:33:33.322Z] >>> [apiv2][query] GET https://api.github.com/repos/tour-project/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:33:33.323Z] >>> [apiv2][query] GET https://api.github.com/repos/BreadcrumbsREACT-PROJECTS/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:33:33.511Z] <<< [apiv2][status] GET https://api.github.com/repos/ceyhunsahin//actions/secrets/public-key 404
+[debug] [2024-02-01T13:33:33.511Z] <<< [apiv2][body] GET https://api.github.com/repos/ceyhunsahin//actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:33:33.515Z] <<< [apiv2][status] GET https://api.github.com/repos/.idea/actions/secrets/public-key 404
+[debug] [2024-02-01T13:33:33.515Z] <<< [apiv2][body] GET https://api.github.com/repos/.idea/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:33:33.517Z] <<< [apiv2][status] GET https://api.github.com/repos/recipe-app/actions/secrets/public-key 404
+[debug] [2024-02-01T13:33:33.517Z] <<< [apiv2][body] GET https://api.github.com/repos/recipe-app/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:33:33.519Z] <<< [apiv2][status] GET https://api.github.com/repos/t/actions/secrets/public-key 404
+[debug] [2024-02-01T13:33:33.519Z] <<< [apiv2][body] GET https://api.github.com/repos/t/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:33:33.524Z] <<< [apiv2][status] GET https://api.github.com/repos/Go to file/actions/secrets/public-key 404
+[debug] [2024-02-01T13:33:33.525Z] <<< [apiv2][body] GET https://api.github.com/repos/Go to file/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:33:33.531Z] <<< [apiv2][status] GET https://api.github.com/repos/rc11-task-tracker-solution/actions/secrets/public-key 404
+[debug] [2024-02-01T13:33:33.531Z] <<< [apiv2][body] GET https://api.github.com/repos/rc11-task-tracker-solution/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:33:33.535Z] <<< [apiv2][status] GET https://api.github.com/repos/public/actions/secrets/public-key 404
+[debug] [2024-02-01T13:33:33.535Z] <<< [apiv2][body] GET https://api.github.com/repos/public/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:33:33.540Z] <<< [apiv2][status] GET https://api.github.com/repos/fakestore/actions/secrets/public-key 404
+[debug] [2024-02-01T13:33:33.540Z] <<< [apiv2][body] GET https://api.github.com/repos/fakestore/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:33:33.541Z] <<< [apiv2][status] GET https://api.github.com/repos/package-lock.json/actions/secrets/public-key 404
+[debug] [2024-02-01T13:33:33.541Z] <<< [apiv2][body] GET https://api.github.com/repos/package-lock.json/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:33:33.542Z] <<< [apiv2][status] GET https://api.github.com/repos/package.json/actions/secrets/public-key 404
+[debug] [2024-02-01T13:33:33.542Z] <<< [apiv2][body] GET https://api.github.com/repos/package.json/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:33:33.544Z] <<< [apiv2][status] GET https://api.github.com/repos/.idea/actions/secrets/public-key 404
+[debug] [2024-02-01T13:33:33.544Z] <<< [apiv2][body] GET https://api.github.com/repos/.idea/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:33:33.553Z] <<< [apiv2][status] GET https://api.github.com/repos/tour-project/actions/secrets/public-key 404
+[debug] [2024-02-01T13:33:33.553Z] <<< [apiv2][body] GET https://api.github.com/repos/tour-project/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:33:33.559Z] <<< [apiv2][status] GET https://api.github.com/repos/yarn.lock/actions/secrets/public-key 404
+[debug] [2024-02-01T13:33:33.559Z] <<< [apiv2][body] GET https://api.github.com/repos/yarn.lock/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:33:33.560Z] <<< [apiv2][status] GET https://api.github.com/repos/task-tracker/actions/secrets/public-key 404
+[debug] [2024-02-01T13:33:33.560Z] <<< [apiv2][body] GET https://api.github.com/repos/task-tracker/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:33:33.561Z] <<< [apiv2][status] GET https://api.github.com/repos/README.md/actions/secrets/public-key 404
+[debug] [2024-02-01T13:33:33.561Z] <<< [apiv2][body] GET https://api.github.com/repos/README.md/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:33:33.562Z] <<< [apiv2][status] GET https://api.github.com/repos/BreadcrumbsREACT-PROJECTS/actions/secrets/public-key 404
+[debug] [2024-02-01T13:33:33.562Z] <<< [apiv2][body] GET https://api.github.com/repos/BreadcrumbsREACT-PROJECTS/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:33:33.564Z] <<< [apiv2][status] GET https://api.github.com/repos/.gitignore/actions/secrets/public-key 404
+[debug] [2024-02-01T13:33:33.565Z] <<< [apiv2][body] GET https://api.github.com/repos/.gitignore/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:33:34.566Z] <<< [apiv2][status] GET https://api.github.com/repos/src/actions/secrets/public-key 404
+[debug] [2024-02-01T13:33:34.566Z] <<< [apiv2][body] GET https://api.github.com/repos/src/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:33:38.384Z] >>> [apiv2][query] GET https://api.github.com/repos//recipe-app/ceyhunsahin/.idearecipe-apptGo to filerc11-task-tracker-solutionpublicfakestorepackage-lock.jsonpackage.json.ideatour-projectyarn.locktask-trackerREADME.mdBreadcrumbsREACT-PROJECTS.gitignoresrc/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:33:38.539Z] <<< [apiv2][status] GET https://api.github.com/repos//recipe-app/ceyhunsahin/.idearecipe-apptGo to filerc11-task-tracker-solutionpublicfakestorepackage-lock.jsonpackage.json.ideatour-projectyarn.locktask-trackerREADME.mdBreadcrumbsREACT-PROJECTS.gitignoresrc/actions/secrets/public-key 404
+[debug] [2024-02-01T13:33:38.539Z] <<< [apiv2][body] GET https://api.github.com/repos//recipe-app/ceyhunsahin/.idearecipe-apptGo to filerc11-task-tracker-solutionpublicfakestorepackage-lock.jsonpackage.json.ideatour-projectyarn.locktask-trackerREADME.mdBreadcrumbsREACT-PROJECTS.gitignoresrc/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:34:23.564Z] >>> [apiv2][query] GET https://api.github.com/repos/ceyhunsahin/REACT-PROJECTS/recipe-app/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:34:23.776Z] <<< [apiv2][status] GET https://api.github.com/repos/ceyhunsahin/REACT-PROJECTS/recipe-app/actions/secrets/public-key 404
+[debug] [2024-02-01T13:34:23.776Z] <<< [apiv2][body] GET https://api.github.com/repos/ceyhunsahin/REACT-PROJECTS/recipe-app/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[info] 
+[info] 
+[error] ⚠  The provided authorization cannot be used with this repository. If this repository is in an organization, did you remember to grant access? 
+[info] 
+[info] i  Action required: Visit this URL to ensure access has been granted to the appropriate organization(s) for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] 
+[debug] [2024-02-01T13:35:40.904Z] >>> [apiv2][query] GET https://api.github.com/repos/ceyhunsahin/REACT-PROJECTS/recipe-app/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:35:41.099Z] <<< [apiv2][status] GET https://api.github.com/repos/ceyhunsahin/REACT-PROJECTS/recipe-app/actions/secrets/public-key 401
+[debug] [2024-02-01T13:35:41.099Z] <<< [apiv2][body] GET https://api.github.com/repos/ceyhunsahin/REACT-PROJECTS/recipe-app/actions/secrets/public-key {"message":"Bad credentials","documentation_url":"https://docs.github.com/rest"}
+[debug] [2024-02-01T13:35:41.915Z] >>> [apiv2][query] GET https://api.github.com/repos/ceyhunsahin/REACT-PROJECTS/recipe-app/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:35:42.041Z] <<< [apiv2][status] GET https://api.github.com/repos/ceyhunsahin/REACT-PROJECTS/recipe-app/actions/secrets/public-key 401
+[debug] [2024-02-01T13:35:42.041Z] <<< [apiv2][body] GET https://api.github.com/repos/ceyhunsahin/REACT-PROJECTS/recipe-app/actions/secrets/public-key {"message":"Bad credentials","documentation_url":"https://docs.github.com/rest"}
+[debug] [2024-02-01T13:35:43.581Z] >>> [apiv2][query] GET https://api.github.com/repos/ceyhunsahin/REACT-PROJECTS/recipe-app/actions/secrets/public-key type=owner
+[debug] [2024-02-01T13:35:43.728Z] <<< [apiv2][status] GET https://api.github.com/repos/ceyhunsahin/REACT-PROJECTS/recipe-app/actions/secrets/public-key 401
+[debug] [2024-02-01T13:35:43.728Z] <<< [apiv2][body] GET https://api.github.com/repos/ceyhunsahin/REACT-PROJECTS/recipe-app/actions/secrets/public-key {"message":"Bad credentials","documentation_url":"https://docs.github.com/rest"}
+[debug] [2024-02-01T14:04:43.439Z] ----------------------------------------------------------------------
+[debug] [2024-02-01T14:04:43.442Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init
+[debug] [2024-02-01T14:04:43.442Z] CLI Version:   13.1.0
+[debug] [2024-02-01T14:04:43.442Z] Platform:      darwin
+[debug] [2024-02-01T14:04:43.442Z] Node Version:  v20.10.0
+[debug] [2024-02-01T14:04:43.442Z] Time:          Thu Feb 01 2024 15:04:43 GMT+0100 (UTC+01:00)
+[debug] [2024-02-01T14:04:43.442Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-02-01T14:04:43.447Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-02-01T14:04:43.447Z] > authorizing via signed-in user (csahin17072010@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/ceyhun/REACT-PROJECTS/recipe-app
+

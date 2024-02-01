@@ -1,5 +1,6 @@
 import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
+import { GoogleAuthProvider} from "firebase/auth";
 
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 const devConfig = {
@@ -12,6 +13,17 @@ const devConfig = {
     measurementId: process.env.REACT_MEASUREMENT_ID,
   };
 const prodConfig = {};
-export const config = process.env.NODE_ENV === "development" ? devConfig : prodConfig;
+const config = process.env.NODE_ENV === "development" ? devConfig : prodConfig;
 const app = initializeApp(config);
-const analytics = getAnalytics(app);
+//const analytics = getAnalytics(app);
+
+
+
+const provider = new GoogleAuthProvider();
+provider.setCustomParameters({
+    prompt: "select_account",
+  });
+
+
+export { app, provider }
+
