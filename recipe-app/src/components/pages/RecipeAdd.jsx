@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState,useRef  } from "react";
 
 import Box from "@mui/system/Box";
 import Stack from "@mui/system/Stack";
@@ -15,18 +15,17 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import TextField from '@mui/material/TextField';
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
+import TextField from "@mui/material/TextField";
+import SendIcon from "@mui/icons-material/Send";
 import Typography from "@mui/material/Typography";
 import { getAuth } from "firebase/auth";
 import { app, provider } from "../Firebase/firebase.utils";
 import { redirect, useNavigate } from "react-router-dom";
 import { useAuth } from "../Firebase/AuthContext";
 import { onAuthStateChanged } from "firebase/auth";
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { collection, setDoc, doc } from 'firebase/firestore';
+import {db} from "../Firebase/firebase.utils";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -41,12 +40,55 @@ const MenuProps = {
 
 const meals = ["Breakfast", "Lunch", "Dinner", "Snack", "TeaTime"];
 
-const cuisineType = ["american", "asian", "british", "caribbean", "central europe",
-  "eastern europe", "french", "greek", "indian", "italian", "japanese", "korean", "kosher",
-  "mediterranean", "mexican", "middle eastern", "nordic", "south american",
-  "south east asian", "world",
+const cuisineType = [
+  "american",
+  "asian",
+  "british",
+  "caribbean",
+  "central europe",
+  "eastern europe",
+  "french",
+  "greek",
+  "indian",
+  "italian",
+  "japanese",
+  "korean",
+  "kosher",
+  "mediterranean",
+  "mexican",
+  "middle eastern",
+  "nordic",
+  "south american",
+  "south east asian",
+  "world",
 ];
-const dishTypes = ["alcohol cocktail","biscuits and cookies","bread","cereals","condiments and sauces","desserts","drinks","egg","ice cream and custard","main course","pancake","pasta","pastry","pies and tarts","pizza","preps","preserve","salad","sandwiches","seafood","side dish","soup","special occasions","starter","sweets"];
+const dishTypes = [
+  "alcohol cocktail",
+  "biscuits and cookies",
+  "bread",
+  "cereals",
+  "condiments and sauces",
+  "desserts",
+  "drinks",
+  "egg",
+  "ice cream and custard",
+  "main course",
+  "pancake",
+  "pasta",
+  "pastry",
+  "pies and tarts",
+  "pizza",
+  "preps",
+  "preserve",
+  "salad",
+  "sandwiches",
+  "seafood",
+  "side dish",
+  "soup",
+  "special occasions",
+  "starter",
+  "sweets",
+];
 
 function getStyles(name, personName, theme) {
   return {
@@ -57,26 +99,39 @@ function getStyles(name, personName, theme) {
   };
 }
 
-const VisuallyHiddenInput = styled('input')({
-    clip: 'rect(0 0 0 0)',
-    clipPath: 'inset(50%)',
-    height: 1,
-    overflow: 'hidden',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    whiteSpace: 'nowrap',
-    width: 1,
-  });
-  
+const VisuallyHiddenInput = styled("input")({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+});
 
 const RecipeAdd = () => {
   const auth = getAuth();
-  // const { user } = useAuth();
+  const formRef = useRef(null);
   const theme = useTheme();
   const [mealTime, setmealTime] = React.useState([]);
   const [cuisine, setCuisine] = React.useState([]);
   const [dishType, setDishType] = React.useState([]);
+  const [image, setImage] = React.useState('');
+  const [ingredients, setIngredients] = React.useState('');
+  const [formData, setFormData] = useState({
+    MealType: mealTime,
+    Cuisine: cuisine,
+    DishType:dishType,
+    Ingredients: ingredients,
+    UserId: auth?.currentUser?.uid,
+    Image: image,
+    
+  });
+
+
+  console.log("FormData",formData)
 
   const navigate = useNavigate();
 
@@ -88,6 +143,7 @@ const RecipeAdd = () => {
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
+    setFormData({...formData, MealType: value})
   };
   const handleChangeCuisine = (event) => {
     const {
@@ -97,6 +153,7 @@ const RecipeAdd = () => {
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
+    setFormData({...formData, Cuisine: value})
   };
   const handleChangeDish = (event) => {
     const {
@@ -106,7 +163,20 @@ const RecipeAdd = () => {
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
+    setFormData({...formData, DishType: value})
   };
+
+  const handleTextFieldChange = (event) => {
+    setIngredients(event.target.value);
+    setFormData({...formData, Ingredients: ingredients})
+  }
+
+  const handleImageUpload = async (event) => {
+    setImage(event.target.files[0].name);
+    console.log('image', image)
+
+    setFormData({...formData, Image: event.target.files[0].name})
+   }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -121,12 +191,26 @@ const RecipeAdd = () => {
     };
   }, [auth]);
 
-  return (
-    //we will design a recipe page with material UI
-    // left side of the page will be 2 a dropdown a textfiled
-    // middle of the page will be image upload button
-    // right side of the page will be 2 a dropdown a textfiled
+ 
+  
+  const sendToFirestore = async (data) => {
+    try {
+        // Add the form data to Firestore
 
+        const docRef = doc(db, 'recipeAdd', 'recipeAppAdd'); // Replace with your collection and document names
+        await setDoc(docRef, formData);
+        console.log('Document successfully written!');
+        setCuisine([])
+        setDishType([])
+        setIngredients('')
+        setmealTime([])
+      } catch (error) {
+        console.error('Error adding document: ', error);
+      }
+    };
+  
+
+  return (
     <Container>
       <Box
         display="flex"
@@ -145,7 +229,7 @@ const RecipeAdd = () => {
           display: {
             xs: "flex",
             md: "flex",
-            wrap:"nowrap",
+            wrap: "nowrap",
             flexDirection: "row",
             justifyContent: "flex-start",
             alignItems: "center",
@@ -153,7 +237,7 @@ const RecipeAdd = () => {
         }}
       >
         {/* Create dropdown Menu */}
-        <FormControl sx={{mx : 5, width: 300 }}>
+        <FormControl sx={{ mx: 5, width: 300 }}>
           <InputLabel id="select-label">MealType</InputLabel>
           <Select
             labelId="MealtypeId"
@@ -175,7 +259,7 @@ const RecipeAdd = () => {
             ))}
           </Select>
         </FormControl>
-        <FormControl sx={{ mx : 5,width: 300 }}>
+        <FormControl sx={{ mx: 5, width: 300 }}>
           <InputLabel id="cuisineTypeinput">Cuisine</InputLabel>
           <Select
             labelId="cuisineTypeId"
@@ -197,7 +281,7 @@ const RecipeAdd = () => {
             ))}
           </Select>
         </FormControl>
-        <FormControl sx={{ mx : 5, width: 300 }}>
+        <FormControl sx={{ mx: 5, width: 300 }}>
           <InputLabel id="dishTypeinput">Dish Type</InputLabel>
           <Select
             labelId="dishTypeId"
@@ -219,7 +303,6 @@ const RecipeAdd = () => {
             ))}
           </Select>
         </FormControl>
-
       </Box>
       <Box
         sx={{
@@ -227,33 +310,57 @@ const RecipeAdd = () => {
           display: {
             xs: "flex",
             md: "flex",
-            wrap:"nowrap",
+            wrap: "nowrap",
             flexDirection: "row",
             justifyContent: "flex-start",
             alignItems: "center",
           },
         }}
-       
       >
         <TextField
           id="Ingredients"
           label="Ingredients"
           multiline
+          value={ingredients}
           rows={8}
           variant="outlined"
-          sx={{ width: 500, mx : 5, my: 5 }}
+          sx={{ width: 500, mx: 5, my: 5 }}
           placeholder="Type ingredients here with commas and don't forget listing"
           fullWidth
+          onChange={ handleTextFieldChange }
           InputLabelProps={{
             shrink: true,
           }}
-         
-          
         />
-     <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
-      Upload Image
-      <VisuallyHiddenInput type="file" />
-    </Button>
+        <Button
+          component="label"
+          variant="contained"
+          sx={{ mx: 10 }}
+          color="info"
+          startIcon={<CloudUploadIcon />}
+          onChange = {handleImageUpload}
+        >
+          Upload Image
+          <VisuallyHiddenInput type="file" />
+        </Button>
+      </Box>
+      <Box
+        sx={{
+          flexGrow: 1,
+          display: {
+            xs: "flex",
+            md: "flex",
+            wrap: "nowrap",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+          },
+        }}
+      >
+        <Button variant="contained" sx={{ mx: 5 }} endIcon={<SendIcon />}
+        onClick={sendToFirestore}>
+          Send
+        </Button>
       </Box>
     </Container>
   );

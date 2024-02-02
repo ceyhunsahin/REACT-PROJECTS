@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { getRecipes } from "../../util";
 import Card from '@mui/material/Card';
 import Skeleton from '@mui/material/Skeleton';
@@ -8,10 +9,14 @@ import Typography from '@mui/material/Typography';
 import Stack from "@mui/system/Stack";
 import Box from "@mui/system/Box";
 import Button from "@mui/material/Button";
-import { Link} from "react-router-dom";
+import { Link, redirect, useNavigate} from "react-router-dom";
 import DetailShareActions from "./DetailPages/DetailShareActions";
+import { getAuth } from 'firebase/auth';
+import {onAuthStateChanged} from "firebase/auth";
 
 export default function CardUnit ({data, searchParams}) {
+
+
 
 
 
@@ -47,9 +52,31 @@ export default function CardUnit ({data, searchParams}) {
     )}
   
   const DelayedCard = ({ item , searchParams}) => {
+    const [user, setUser] = useState(null);
     const extractIdFromUri=(uri) => {
         return uri.split('#recipe_').pop()
     }  
+    const navigate = useNavigate();
+    useEffect(() => {
+      const auth = getAuth();
+      
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        setUser(user);
+      });
+  
+      // useEffect içinde temizlik işlemi
+      return () => unsubscribe();
+    }, [user]);
+
+    const handleLearnClick = () => {
+      if (user) {
+        navigate(`/recipeDetail/${extractIdFromUri(item.uri)}`);
+      } else {
+
+      navigate("/login");
+      }
+ 
+   }
 
   return (
   <Card sx={{ width: 345, height: 350, marginTop: 3 }} key={extractIdFromUri(item.recipe.uri)}>
@@ -76,7 +103,7 @@ export default function CardUnit ({data, searchParams}) {
   </Link>
   <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
     <DetailShareActions id = {extractIdFromUri(`${item.recipe.uri}`)} />
-    <Button size="small">Learn More</Button>
+    <Button size="small" onClick = {handleLearnClick}>Learn More</Button>
   </Box>
 </Card>
   )}

@@ -2,6 +2,7 @@ import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { GoogleAuthProvider} from "firebase/auth";
 import { getFirestore } from 'firebase/firestore';
+import { getDatabase } from 'firebase/database';
 
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 const devConfig = {
@@ -20,6 +21,7 @@ const app = initializeApp(config);
 
 
 const db = getFirestore(app);
+
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({
     prompt: "select_account",

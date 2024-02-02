@@ -37,13 +37,6 @@ function Navbar() {
   const id = useId();
   const navigate = useNavigate();
 
-  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-
-  const { setAuthUser } = useAuth();
-  const auth = getAuth();
-
-
   useEffect(() => {
     const auth = getAuth();
     
