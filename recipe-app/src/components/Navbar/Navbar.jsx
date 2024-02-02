@@ -13,6 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { SvgIcon } from "@mui/material";
+import CircularProgress from '@mui/material/CircularProgress';
 import { styled } from "@mui/system";
 import { NavLink, Link } from "react-router-dom";
 import { useId } from "react";
@@ -20,6 +21,7 @@ import "../../assets/styles.css";
 import Signup from "../pages/Signup";
 import {StyledNavLink, StyledTypo, StyledLittleTypo} from "./styleNavbar";
 import { getAuth,signOut } from 'firebase/auth';
+import {onAuthStateChanged} from "firebase/auth";
 
 import { useAuth } from '../Firebase/AuthContext';
 import { useNavigate } from "react-router-dom";
@@ -31,11 +33,28 @@ const pages = ["recipes", "about", "github"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
+  const [user, setUser] = useState(null);
   const id = useId();
   const navigate = useNavigate();
 
-  const { user } = useAuth();
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+
   const { setAuthUser } = useAuth();
+  const auth = getAuth();
+
+
+  useEffect(() => {
+    const auth = getAuth();
+    
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+
+    // useEffect içinde temizlik işlemi
+    return () => unsubscribe();
+  }, [user]);
+
 
   console.log("NAvbar user value", user );
 
@@ -68,14 +87,22 @@ function Navbar() {
     setAnchorElUser(null);
     const situationOfProfil = e.target.textContent
     console.log('situationOfProfil ',situationOfProfil )
+    const auth = getAuth();
     if(situationOfProfil==='Logout') {
-    setAuthUser('');
+      signOut(auth).then(() => {
+   
         console.log("NAvbar Auth logout sonrasi", user);
-        // User is signed in
-        return navigate("/");
+        navigate("/login");
+      }).catch((error) => {
+        console.log("errror", error)
+      });
+    } else {
+        return null
+      }
+    
      
     }
-  };
+  
 
   const handleHomeMenu = () => {
     return null
@@ -86,6 +113,8 @@ function Navbar() {
 
 
   return (
+    <>
+
     <AppBar position="static">
       <div style = {{backgroundColor:'#D3B59B'}}>
         <Toolbar disableGutters sx = {{mx:4}}>
@@ -184,7 +213,7 @@ function Navbar() {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "block", md: "none" },
+                display: { xs: "contents", md: "none" }
               }}
             >
               {pages.map((page,index) => (
@@ -198,9 +227,15 @@ function Navbar() {
                     <StyledLittleTypo variant = 'h5'>
                       {page}
                     </StyledLittleTypo>
+                    
                   </Link>
                 </MenuItem>
               ))}
+              <StyledNavLink to= "/addrecipe" >
+
+                <StyledLittleTypo variant = 'h5'>Add Recipe</StyledLittleTypo>
+              </StyledNavLink>
+
             </Menu>
           </Box>
           <Link to="/" sx={{ cursor: "pointer" }}>
@@ -346,6 +381,8 @@ function Navbar() {
         </Toolbar>
       </div>
     </AppBar>
+    </>
+
   );
 }
 export default Navbar;

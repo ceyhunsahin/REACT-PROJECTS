@@ -12,6 +12,7 @@ const detailUri = "http%3A%2F%2Fwww.edamam.com%2Fontologies%2Fedamam.owl%23recip
 export const getRecipes = async (query , mealType) => {
     console.log("mealTypefull", mealType)
     console.log("queryfull", query)
+    
     const queryParams = [];
 
 
@@ -31,6 +32,7 @@ export const getRecipes = async (query , mealType) => {
     const fullUrl = `${url}?type=public&app_id=${app_id}&app_key=${app_key}${queryParams.length > 0 ? `&${queryParams.join('&')}` : ''}`;
     try {
         const response = await axios.get(fullUrl);
+     
         return response.data;
 
     } catch (error) {

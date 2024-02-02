@@ -15,14 +15,16 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
 import { getRecipes } from "../../util";
-import { useLoaderData, useSearchParams, Link, useLocation} from "react-router-dom";
-import DetailShareActions from "./DetailPages/DetailShareActions";
+import { useLoaderData, useSearchParams,  useLocation} from "react-router-dom";
+
+import CardUnit from "./CardUnit"
+
+
+
+
+
+
 
 // loader.js
 export function loader({ request }) {
@@ -154,8 +156,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+
 function Recipes() {
   const data = useLoaderData().hits;
+  console.log('objects', data)
 
   const [loading, setLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -163,12 +167,10 @@ function Recipes() {
   const [mealsName, setMealsName] = useState([]);
 
 
-  
-
-
   function handleClick() {
     setLoading(false);
     setTimeout(() => setLoading(true), 1000);
+    
   
     setSearchParams((prevSearchParams) => {
       const updatedSearchParams = {
@@ -207,19 +209,16 @@ function Recipes() {
       target: { value },
     } = event;
     setQuery(value);
-    console.log("queryryryryryryr",query)
 
     }
 
-  const extractIdFromUri=(uri) => {
-    return uri.split('#recipe_').pop()
-}  
+  
 
   const location = useLocation();
   const searchParamsNew = new URLSearchParams(location.search);
   const queryFromParams = searchParamsNew.get('q');
   const mealTypeFromParams = searchParamsNew.getAll('mealType');
-  const fbclid = searchParamsNew.get('fbclid');
+
 
 
 
@@ -237,10 +236,9 @@ function Recipes() {
   };
 
 
-
-
   return (
     <Container >
+
       <Stack
         direction={{ xs: "column", sm: "row" }}
         justifyContent="center"
@@ -325,47 +323,7 @@ function Recipes() {
           </Select>
         </FormControl>
       </Stack>
-      <Stack
-        direction={{ xs: "column", sm: "row" }}
-
-        justifyContent="space-between"
-        overflow='hidden'
-        flexWrap= "wrap"
-        mt={4}
-        mb={3}
-        sx={{
-        border: '1px solid #ddd', 
-        borderRadius: '4px',
-        padding: '10px', 
-        backgroundColor: '#F5F3F8',
-      }}
-        >
-         {data.map((item) => (
-          <Card sx={{ width: 345, height: 350, marginTop: 3 }} key={extractIdFromUri(item.recipe.uri)}>
-            <Link
-              to={extractIdFromUri(`${item.recipe.uri}`)}
-              style={{ textDecoration: "none", color: "inherit" }}
-              state={{
-                search: `${searchParams.toString()}`,
-              }}
-            >
-              <CardMedia sx={{ height: 180 }} image={item.recipe.image} title={item.recipe.label} />
-              <CardContent sx={{ height: 80 }}>
-                <Typography gutterBottom variant="h5" component="div">
-                  {item.recipe.label}
-                </Typography>
-              </CardContent>
-            </Link>
-            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
-              <DetailShareActions id = {extractIdFromUri(`${item.recipe.uri}`)} />
-              <Button size="small">Learn More</Button>
-            </Box>
-          </Card>
-        ))}
-
-          
-
-        </Stack>
+     <CardUnit data = {data} searchParams = {searchParams} />
     </Container>
   );
 }

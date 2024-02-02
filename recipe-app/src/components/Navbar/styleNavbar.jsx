@@ -20,13 +20,13 @@ export const StyledTypo = styled(Typography)(({ theme }) => ({
     fontWeight: 500,
     transition: 'color 0.2s ease-in-out', // Add a transition property for smoother effect
     '&:hover': {
-      color: theme.palette.common.white,
+      color: theme.palette.secondary.light,
     },
     '&:visited': {
-      color: theme.palette.common.grey,
+      color: theme.palette.info.light,
     },
     '&:active': {
-      color: theme.palette.common.orange,
+      color: theme.palette.success.light,
     },
    
   }));
@@ -38,4 +38,14 @@ export const StyledLittleTypo = styled(Typography)(({ theme }) => ({
     fontWeight: 300,
     textDecoration: 'none',
     color:"#e51a59",
+    transition: 'color 0.2s ease-in-out', // Add a transition property for smoother effect
+    '&:hover': {
+      color: theme.palette.secondary.light,
+    },
+    '&:visited': {
+      color: theme.palette.info.light,
+    },
+    '&:active': {
+      color: theme.palette.success.light,
+    },
   }));
