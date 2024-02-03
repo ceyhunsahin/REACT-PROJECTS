@@ -15,18 +15,23 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 const Home = () => {
+  const storedUser = localStorage.getItem('user');
+  console.log('storedUser',storedUser)
+  const footer = document.querySelectorAll('#footer')[0];
+  console.log("footer",footer)
+
   return (
 
       <div
         style={{
           width: "100%",
-          height: "100vh", // Full viewport height
+          height: "100%", // Full viewport height
         }}
       >
         
           <Box  sx={{
                     width: "100%",
-                    height: "100vh",
+                    height: `calc(100vh - 144px)`,
                     backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://picsum.photos/1600/900")',
                     backgroundSize: "cover",
                     backgroundPosition: "center",
@@ -52,11 +57,11 @@ const Home = () => {
             <Stack
         spacing={4}
         alignItems="center"
-        justifyContent="space-between"
+        justifyContent="space-evenly"
         sx={{
-          height: "60vh",
+          width: "100%",
+          minHeight: "73vh",
           textAlign: "center",
-          mx:5
         }}
       >
         <Typography variant="h2" component="div"
@@ -76,10 +81,10 @@ const Home = () => {
             >
           Your culinary journey starts here.
         </Typography>
-        <Typography variant="h4" 
+        <Typography variant="h4"
          sx = {{color: "#ffffff",
             fontFamily: "Courant",
-            fontWeight: 300, ml : 15}}>
+            fontWeight: 300, marginLeft : '5rem'}}>
           Explore a world of diverse and delectable recipes crafted for food
           enthusiasts like you. Whether you're a seasoned chef or just starting
           out, we have something special for every taste bud.
@@ -94,6 +99,9 @@ const Home = () => {
             Discover Recipes
           </Button>
         </Link>
+        {storedUser ? (<></>)
+          :
+          (
         <Box
           sx={{
             mt: 3,
@@ -109,12 +117,17 @@ const Home = () => {
             fontWeight: 300 }}>
             Join our community for exclusive recipes, tips, and more!
           </Typography>
+          
+          
           <StyledNavLink to ="/signup">
             <ColorButton variant="contained">
               Sign Up Now
             </ColorButton>
           </StyledNavLink>
+          
+
         </Box>
+        )}
       </Stack>
           </Box>
         

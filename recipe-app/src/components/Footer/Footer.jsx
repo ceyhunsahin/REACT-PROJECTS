@@ -9,17 +9,18 @@ import { positions } from '@mui/system';
 function Footer() {
     return (
         <Box
+          id = 'footer'
           sx={{
             width: "100%",
             height: "auto",
             backgroundColor: "text.disabled",
-            position: "sticky",
+            position: "fixed",
             bottom: 0,
             padding: "10px",
             textAlign: "center",
           }}
         >
-          <Container maxWidth="lg">
+          <Container maxWidth="lg" id = 'footerinner'>
             <Grid container direction="column" alignItems="center">
               <Grid item xs={12}>
                 <Typography color="black" variant="h5">

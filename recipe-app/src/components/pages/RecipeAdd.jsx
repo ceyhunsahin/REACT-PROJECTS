@@ -5,9 +5,8 @@ import Stack from "@mui/system/Stack";
 import { Container } from "@mui/material";
 //import { styled } from '@mui/system';
 import { styled, alpha } from "@mui/material/styles";
-import SearchIcon from "@mui/icons-material/Search";
-import InputBase from "@mui/material/InputBase";
-import { LoadingButton } from "@mui/lab";
+import Snackbar from '@mui/joy/Snackbar';
+import PlaylistAddCheckCircleRoundedIcon from '@mui/icons-material/PlaylistAddCheckCircleRounded';
 import Button from "@mui/material/Button";
 import { useTheme } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -113,7 +112,7 @@ const VisuallyHiddenInput = styled("input")({
 
 const RecipeAdd = () => {
   const auth = getAuth();
-  const formRef = useRef(null);
+  
   const theme = useTheme();
   const [mealTime, setmealTime] = React.useState([]);
   const [cuisine, setCuisine] = React.useState([]);
@@ -125,10 +124,11 @@ const RecipeAdd = () => {
     Cuisine: cuisine,
     DishType:dishType,
     Ingredients: ingredients,
-    UserId: auth?.currentUser?.uid,
     Image: image,
     
   });
+
+  const [open, setOpen] = React.useState(false);
 
 
   console.log("FormData",formData)
@@ -200,18 +200,22 @@ const RecipeAdd = () => {
         const docRef = doc(db, 'recipeAdd', 'recipeAppAdd'); // Replace with your collection and document names
         await setDoc(docRef, formData);
         console.log('Document successfully written!');
+        
         setCuisine([])
         setDishType([])
         setIngredients('')
         setmealTime([])
+        setOpen(true)
       } catch (error) {
         console.error('Error adding document: ', error);
       }
     };
+
+  console.log('open', open)
   
 
   return (
-    <Container>
+    <Container direction={{ xs: "row", sm: "column" }}>
       <Box
         display="flex"
         justifyContent="center"
@@ -361,6 +365,26 @@ const RecipeAdd = () => {
         onClick={sendToFirestore}>
           Send
         </Button>
+        <Snackbar
+        variant="soft"
+        color="success"
+        open={open}
+        onClose={() => setOpen(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        startDecorator={<PlaylistAddCheckCircleRoundedIcon />}
+        endDecorator={
+          <Button
+            onClick={() => setOpen(false)}
+            size="sm"
+            variant="soft"
+            color="success"
+          >
+            Dismiss
+          </Button>
+        }
+      >
+        Your recipe was sent successfully.
+      </Snackbar>
       </Box>
     </Container>
   );

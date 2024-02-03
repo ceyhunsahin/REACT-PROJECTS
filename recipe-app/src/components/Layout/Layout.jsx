@@ -6,7 +6,7 @@ import "../../assets/styles.css"
 
 function Layout() {
     return (
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
           <Navbar />
           <main style = {{backgroundColor : '#F2F7F9'}}>
             <Outlet />

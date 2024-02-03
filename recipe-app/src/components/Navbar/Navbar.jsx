@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
@@ -28,25 +29,47 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "firebaseui";
 
 
-const pages = ["recipes", "about", "github"];
+const pages = ["recipes", "about", "github", "add recipe", 'signUp', 'login'];
+const pagesXL = ["recipes", "about", "github", "add recipe"];
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pagesLink = ["recipes", "about", "github", "addrecipe", 'signUp', 'login'];
+const pagesLinkXL = ["recipes", "about", "github", "addrecipe"];
+
+
+const settings = [ "Logout"];
 
 function Navbar() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const id = useId();
   const navigate = useNavigate();
 
   useEffect(() => {
     const auth = getAuth();
     
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
+      setLoading(false); // Set loading to false when user state is determined
+
+      // Save user data to localStorage
+      if (user) {
+        localStorage.setItem('user', JSON.stringify(user));
+      } else {
+        localStorage.removeItem('user');
+      }
     });
+  
+      // useEffect içinde temizlik işlemi
+      return () => unsubscribe();
+    }, []);
 
     // useEffect içinde temizlik işlemi
-    return () => unsubscribe();
-  }, [user]);
+
 
 
   console.log("NAvbar user value", user );
@@ -85,7 +108,7 @@ function Navbar() {
       signOut(auth).then(() => {
    
         console.log("NAvbar Auth logout sonrasi", user);
-        navigate("/login");
+        navigate("/");
       }).catch((error) => {
         console.log("errror", error)
       });
@@ -180,7 +203,7 @@ function Navbar() {
           </Typography>
           </Link>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" }}}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -196,41 +219,45 @@ function Navbar() {
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: "bottom",
-                horizontal: "left",
+                horizontal: "center",
               }}
               keepMounted
               transformOrigin={{
                 vertical: "top",
-                horizontal: "left",
+                horizontal: "center",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "contents", md: "none" }
+                display: { xs: "contents", md: "none" },
+                
               }}
             >
               {pages.map((page,index) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <Stack>
+                <MenuItem onClick={handleCloseNavMenu}>
                   <Link
                     key={`${page}-${id}`}
                     onClick={handleCloseNavMenu}
-                    to={`/${page.toLowerCase()}`}
+                    to={`/${pagesLink[index]}`}
                     style={{ textDecoration: "none"}}
                   >
-                    <StyledLittleTypo variant = 'h5'>
+                  
+                    <StyledLittleTypo variant = 'h5' >
                       {page}
                     </StyledLittleTypo>
+                 
                     
                   </Link>
                 </MenuItem>
+                </Stack>
               ))}
-              <StyledNavLink to= "/addrecipe" >
 
-                <StyledLittleTypo variant = 'h5'>Add Recipe</StyledLittleTypo>
-              </StyledNavLink>
 
             </Menu>
+            
           </Box>
+
           <Link to="/" sx={{ cursor: "pointer" }}>
             <SvgIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}>
               <svg
@@ -301,21 +328,18 @@ function Navbar() {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {pages.map((page, index) => (
              
                 <StyledNavLink
                   key={`${page}-${id}`}
                   onClick={handleCloseNavMenu}
-                  to={`/${page.toLowerCase()}`}
+                  to={`/${pagesLinkXL[index]}`}
                 >
-                  <StyledTypo variant='h4'>{page}</StyledTypo>
+                  <StyledTypo variant='h5'>{pagesXL[index]}</StyledTypo>
                 </StyledNavLink>
         
             ))}
-            <StyledNavLink to= "/addrecipe" >
 
-            <StyledTypo variant='h4'>Add Recipe</StyledTypo>
-            </StyledNavLink>
           </Box>
 
 
@@ -349,14 +373,14 @@ function Navbar() {
           <Box  sx={{ flexGrow: 0, display: { xs: "none", md: "flex" }}}>
           
   
-                <StyledNavLink to= "/signup" >
+                <StyledNavLink to= "/signup" key={`signup-${id}`} >
   
-                <StyledTypo variant='h4'>Sign Up</StyledTypo>
+                <StyledTypo variant='h5'>Sign Up</StyledTypo>
                 </StyledNavLink>
                 
-                <StyledNavLink to= "/login" >
+                <StyledNavLink to= "/login" key={`login-${id}`}>
   
-                <StyledTypo variant='h4'>Log In</StyledTypo>
+                <StyledTypo variant='h5'>Log In</StyledTypo>
                 </StyledNavLink>
                 
             </Box>

@@ -237,10 +237,11 @@ function Recipes() {
 
 
   return (
-    <Container >
+    <Container sx ={{mb:10, overflowY: 'auto',position: 'relative', minHeight:'100%'}}>
 
       <Stack
-        direction={{ xs: "column", sm: "row" }}
+        direction={{ xl: "row", sm: "column" }}
+
         justifyContent="center"
         alignItems="center"
         spacing={3}
@@ -282,7 +283,7 @@ function Recipes() {
           )}
         </Stack>
 
-        <FormControl sx={{ s: 1, width: 300, height: -200 }}>
+        <FormControl sx={{ s: 1, width: 300 }}>
           <InputLabel id="demo-multiple-chip-label">Meals</InputLabel>
           <Select
             labelId="demo-multiple-chip-label"

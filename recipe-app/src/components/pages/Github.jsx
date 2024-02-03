@@ -4,7 +4,7 @@ import '../../assets/styles.css'
 import { Box,Typography} from "@mui/material";
 export default function Github() {
     return (
-        <div className="container" style= {{marginBottom: '44rem', }}>
+        <div className="container">
 
         <Link to="https://github.com/ceyhunsahin" style = {{textDecoration: "none"}}> 
         <Typography variant= 'h3' >

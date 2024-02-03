@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import Stack from "@mui/system/Stack";
 import Box from "@mui/system/Box";
 import Button from "@mui/material/Button";
-import { Link, redirect, useNavigate} from "react-router-dom";
+import { Link, redirect, useNavigate ,useLocation} from "react-router-dom";
 import DetailShareActions from "./DetailPages/DetailShareActions";
 import { getAuth } from 'firebase/auth';
 import {onAuthStateChanged} from "firebase/auth";
@@ -25,21 +25,25 @@ export default function CardUnit ({data, searchParams}) {
 
     return (
 
-      <Stack
-      direction={{ xs: "column", sm: "row" }}
+      <Box
 
-      justifyContent="space-between"
-      overflow='hidden'
-      flexWrap= "wrap"
-      mt={4}
-      mb={3}
-      sx={{
-      border: '1px solid #ddd', 
-      borderRadius: '4px',
-      padding: '10px', 
-      backgroundColor: '#F5F3F8',
-    }}
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          overflow:'hidden',
+          flexWrap: "wrap",
+          alignItems: "center",
+          width: "100%",
+          height: "100%",
+          padding: "10px",
+          margin: "10px",
+          borderRadius: '4px',
+          padding: '10px', 
+          backgroundColor: '#F5F3F8',
+        }}
       >
+
       <>
       {data.map((item,index) => (
         
@@ -48,38 +52,51 @@ export default function CardUnit ({data, searchParams}) {
       ))}
       </>
 
-      </Stack>
+      </Box>
     )}
   
   const DelayedCard = ({ item , searchParams}) => {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const location = useLocation();
+    console.log("location",location)
     const extractIdFromUri=(uri) => {
         return uri.split('#recipe_').pop()
     }  
     const navigate = useNavigate();
     useEffect(() => {
       const auth = getAuth();
+     
       
-      const unsubscribe = onAuthStateChanged(auth, (user) => {
-        setUser(user);
-      });
+      const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      setLoading(false); // Set loading to false when user state is determined
+
+      // Save user data to localStorage
+      if (user) {
+        localStorage.setItem('user', JSON.stringify(user));
+      } else {
+        localStorage.removeItem('user');
+      }
+    });
   
       // useEffect içinde temizlik işlemi
       return () => unsubscribe();
-    }, [user]);
+    }, []);
 
-    const handleLearnClick = () => {
-      if (user) {
-        navigate(`/recipeDetail/${extractIdFromUri(item.uri)}`);
-      } else {
 
-      navigate("/login");
-      }
+    console.log("useruser",user)
+
  
-   }
+   
 
   return (
-  <Card sx={{ width: 345, height: 350, marginTop: 3 }} key={extractIdFromUri(item.recipe.uri)}>
+  <Card sx={{ width: 325, height: 350, margin: 3,overflowY: 'auto' }} key={extractIdFromUri(item.recipe.uri)}>
   <Link
     to={extractIdFromUri(`${item.recipe.uri}`)}
     style={{ textDecoration: "none", color: "inherit" }}
@@ -103,7 +120,18 @@ export default function CardUnit ({data, searchParams}) {
   </Link>
   <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
     <DetailShareActions id = {extractIdFromUri(`${item.recipe.uri}`)} />
-    <Button size="small" onClick = {handleLearnClick}>Learn More</Button>
+    {user ? (
+      <Link to={`${extractIdFromUri(item.recipe.uri)}`} 
+      state={{
+      search: `${searchParams.toString()}`,
+    }}>
+        <Button size="small">Learn More</Button>
+      </Link>
+    )
+    :
+    (navigate('/login'))
+    }
+   
   </Box>
 </Card>
   )}

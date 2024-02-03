@@ -2,7 +2,7 @@ import React from 'react'
 import '../../assets/styles.css'
 export default function About() {
     return (
-        <div className="container" style= {{marginBottom: '29rem'}}>
+        <div className="container" >
             <h1>About Us</h1>
             <p>
             Welcome to our amazing world of flavors and recipes! At our kitchen, we
